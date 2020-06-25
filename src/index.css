@@ -5,6 +5,38 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+
+  min-height: 100vh;
+  display: flex;
+  font-weight: 400;
+  font-family: 'Fira Sans', sans-serif;
+}
+
+body, html, .App, #root, .signUpContainer {
+  width: 100%;
+  height: 100%;
+}
+
+.signUpContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: left;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  background-color: #FFEAB2;
+}
+
+.signUpInner {
+  width: 300px;
+  margin: auto;
+  background: #ffffff;
+  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+  padding: 40px 55px 45px 55px;
+  border-radius: 15px;
+  transition: all .3s;
+  border: 4px solid #EBE1D3;
 }
 
 code {
