@@ -3,8 +3,10 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  useLocation
 } from "react-router-dom";
+import { withRouter } from "react-router";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import SignUpForm from './components/SignUpForm';
 
@@ -26,28 +28,96 @@ export default function App() {
           </Route>
         </Switch>
         <nav>
-          <ul>
-            <li>
-              <Link to="/signup">Sign Up</Link>
-            </li>
-            <li>
-              <Link to="/login">Log In</Link>
-            </li>
-          </ul>
+          <LogInLink />
+          <SignUpLink />
+          <SignUpButton />&nbsp;
+          <LogInButton />
         </nav>
       </div>
     </Router>
   );
 }
 
+const DisplayLogInLink = () => {
+  const location = useLocation();
+  //if (location.pathname.match(/signup/)){
+  if (location.pathname !== "/signup"){
+    return null;
+  }
+
+  return (
+    <span>
+    Already have an account?&nbsp;
+    <Link to="/login">
+    Log in!
+    </Link>
+    </span>
+  )
+}
+
+const DisplaySignUpLink = () => {
+  const location = useLocation();
+  //if (location.pathname.match(/signup/)){
+  if (location.pathname !== "/login"){
+    return null;
+  }
+
+  return (
+    <span>
+    Don't have an account?&nbsp;
+    <Link to="/signup">
+    Sign up!
+    </Link>
+    </span>
+  )
+}
+
+const DisplaySignUpButton = () => {
+  const location = useLocation();
+  //if (location.pathname.match(/signup/)){
+  if (location.pathname !== "/"){
+    return null;
+  }
+
+  return (
+    <Link to="/signup">
+      <button type="button" class="btn btn-primary">
+        Sign Up
+      </button>
+    </Link>
+  )
+}
+
+const DisplayLogInButton = () => {
+  const location = useLocation();
+  //if (location.pathname.match(/signup/)){
+  if (location.pathname !== "/"){
+    return null;
+  }
+
+  return (
+    <Link to="/login">
+      <button type="button" class="btn btn-primary">
+        Log In
+      </button>
+    </Link>
+  )
+}
+
+const LogInLink = withRouter(DisplayLogInLink);
+const SignUpLink = withRouter(DisplaySignUpLink);
+const LogInButton = withRouter(DisplayLogInButton);
+const SignUpButton = withRouter(DisplaySignUpButton);
+
+
 function SignUp() {
   return <div className="signUpContainer"><div className="signUpInner"><SignUpForm /></div></div>;
 }
 
 function LogIn() {
-  return <h2>Log In</h2>;
+  return <h2 className="pageTitle">Log In</h2>;
 }
 
 function Welcome() {
-  return <h2>Welcome to Housemeet!</h2>;
+  return <h2 className="pageTitle">Welcome to Housemeet!</h2>;
 }
