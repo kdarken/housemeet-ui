@@ -10,34 +10,6 @@ import { withRouter } from "react-router";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import SignUpForm from './components/SignUpForm';
 
-export default function App() {
-  return (
-    <Router>
-    {/* A <Switch> looks through its children <Route>s and
-        renders the first one that matches the current URL. */}
-      <div>
-        <Switch>
-          <Route path="/signup">
-            <SignUp />
-          </Route>
-          <Route path="/login">
-            <LogIn />
-          </Route>
-          <Route path="/">
-            <Welcome />
-          </Route>
-        </Switch>
-        <nav>
-          <LogInLink />
-          <SignUpLink />
-          <SignUpButton />&nbsp;
-          <LogInButton />
-        </nav>
-      </div>
-    </Router>
-  );
-}
-
 const DisplayLogInLink = () => {
   const location = useLocation();
   //if (location.pathname.match(/signup/)){
@@ -121,3 +93,41 @@ function LogIn() {
 function Welcome() {
   return <h2 className="pageTitle">Welcome to Housemeet!</h2>;
 }
+
+
+class App extends React.Component {
+  constructor(props) {
+      super(props);
+      this.state = { apiResponse: "" };
+  }
+
+  render() {
+    return (
+      <Router>
+      {/* A <Switch> looks through its children <Route>s and
+          renders the first one that matches the current URL. */}
+        <div>
+          <Switch>
+            <Route path="/signup">
+              <SignUp />
+            </Route>
+            <Route path="/login">
+              <LogIn />
+            </Route>
+            <Route path="/">
+              <Welcome />
+            </Route>
+          </Switch>
+          <nav>
+            <LogInLink />
+            <SignUpLink />
+            <SignUpButton />&nbsp;
+            <LogInButton />
+          </nav>
+        </div>
+      </Router>
+    );
+  }
+}
+
+export default App;
