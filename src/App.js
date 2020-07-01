@@ -9,6 +9,7 @@ import {
 import { withRouter } from "react-router";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import SignUpForm from './components/SignUpForm';
+import LoginPage from './containers/LoginPage';
 
 const DisplayLogInLink = () => {
   const location = useLocation();
@@ -87,7 +88,7 @@ function SignUp() {
 }
 
 function LogIn() {
-  return <h2 className="pageTitle">Log In</h2>;
+  return <LoginPage />;
 }
 
 function Welcome() {
