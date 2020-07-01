@@ -10,6 +10,7 @@ import { withRouter } from "react-router";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import SignUpForm from './components/SignUpForm';
 import LoginPage from './containers/LoginPage';
+import SignUpPage from './containers/SignUpPage';
 
 const DisplayLogInLink = () => {
   const location = useLocation();
@@ -84,7 +85,7 @@ const SignUpButton = withRouter(DisplaySignUpButton);
 
 
 function SignUp() {
-  return <div className="signUpContainer"><div className="signUpInner"><SignUpForm /></div></div>;
+  return <SignUpPage />;
 }
 
 function LogIn() {

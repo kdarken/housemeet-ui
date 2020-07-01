@@ -23,7 +23,7 @@ class LoginPage extends Component {
         <header className="Login-header">
           <DisplayLogo />
         </header>
-        <body>
+        
           <div class="text-center text-secondary" style={this.styles}>
             Log into your account
           </div>
@@ -41,7 +41,7 @@ class LoginPage extends Component {
           >
             Forgot your password? Click here
           </div>
-        </body>
+        
       </div>
     );
   }

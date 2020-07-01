@@ -31,8 +31,6 @@ class SignUpForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <h2>Sign Up</h2>
-
         <div className="form-group">
           <label>
             Name:
