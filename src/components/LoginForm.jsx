@@ -1,3 +1,6 @@
+/**This file was created by Divinee Chidume and is used to render login form on the
+ * the Login Page for the House Meet Application.
+ */
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import "bootstrap/dist/css/bootstrap.css";
@@ -9,11 +12,14 @@ class LoginForm extends Component {
     this.state = {
       email: "",
       password: "",
+      passwordtype: "password",
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
+
   handleChange(event) {
     const value = event.target.value;
     this.setState({
@@ -26,49 +32,61 @@ class LoginForm extends Component {
     alert("Successfully logged into " + this.state.name + "'s account");
     event.preventDefault();
   }
+
+  handleClick = () =>
+    this.setState(({ passwordtype }) => ({
+      passwordtype: passwordtype === "text" ? "password" : "text",
+    }));
+
   render() {
     return (
-      <div
-        style={{
-          fontFamily: "montserrat",
-          fontStyle: "normal",
-          fontWeight: "bold",
-          fontSize: 25,
-          textAlign: "center",
-        }}
-      >
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-group col-sm-10">
+      <form onSubmit={this.handleSubmit}>
+        <div className="form-group col-sm-20">
+          <input
+            type="text"
+            name="email"
+            placeholder="email"
+            className="form-control form-control-lg text-center"
+            value={this.state.email}
+            onChange={this.handleChange}
+            required
+          />
+        </div>
+        <div className="form-group col-sm-20">
+          <input
+            type={this.state.passwordtype}
+            name="password"
+            className="form-control form-control-lg text-center"
+            id="password"
+            placeholder="password"
+            value={this.state.password}
+            onChange={this.handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <div className="form-check">
             <input
-              type="text"
-              name="email"
-              placeholder="email"
-              className="form-control form-control-lg text-center"
-              value={this.state.email}
-              onChange={this.handleChange}
-              required
+              type="checkbox"
+              id="checkbox"
+              className="form-check-input"
+              onClick={this.handleClick}
             />
+            <label
+              className="form-check-label"
+              for="checkbox"
+              style={{ fontFamily: "montserrat" }}
+            >
+              Show password
+            </label>
           </div>
-
-          <div className="form-group col-sm-10">
-            <input
-              type="text"
-              name="password"
-              className="form-control form-control-lg text-center"
-              id="password"
-              placeholder="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-              required
-            />
-          </div>
-          <div style={{ paddingTop: 10 }}>
-            <button type="submit" className="btn btn-primary btn-lg">
+          <div style={{ paddingTop: 10, textAlign: "center" }}>
+            <button type="submit" className="btn btn-primary btn-lg mb-2">
               Submit
             </button>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     );
   }
 }

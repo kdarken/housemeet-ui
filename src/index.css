@@ -1,9 +1,8 @@
-
 body {
   margin: 0;
-  background: #FFEAB2 !important;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  background: #ffeab2 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -11,12 +10,19 @@ body {
   min-height: 100vh;
   display: flex;
   font-weight: 400;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: "Fira Sans", sans-serif;
 }
 
-h1,h2,h3,h4,h5,h6,label,span {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label,
+span {
   font-weight: 500;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: "Fira Sans", sans-serif;
 }
 
 .housemeetBackground {
@@ -36,7 +42,11 @@ label {
   font-size: 15px;
 }
 
-body, html, .App, #root, .signUpContainer {
+body,
+html,
+.App,
+#root,
+.signUpContainer {
   width: 100%;
   height: 100%;
 }
@@ -71,10 +81,16 @@ button {
   box-sizing: border-box;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   padding: 40px 55px 45px 55px;
+<<<<<<< HEAD
   transition: all .3s;
   border: 4px solid #ebe1d3;
   border-radius: 15px;
   transition: all 0.3s;
+=======
+  border-radius: 15px;
+  transition: all 0.3s;
+  border: 4px solid #ebe1d3;
+>>>>>>> almost done with login page
 }
 
 .signUpContainer h2 {
@@ -105,6 +121,6 @@ button {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
