@@ -95,7 +95,7 @@ button {
   display: flex;
   justify-content: center;
   flex-direction: row;
-  padding-top: 0px;
+  padding-top: 30px;
 }
 
 .loginInner {
