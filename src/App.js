@@ -12,23 +12,6 @@ import SignUpForm from './components/SignUpForm';
 import LoginPage from './containers/LoginPage';
 import SignUpPage from './containers/SignUpPage';
 
-const DisplayLogInLink = () => {
-  const location = useLocation();
-  //if (location.pathname.match(/signup/)){
-  if (location.pathname !== "/signup"){
-    return null;
-  }
-
-  return (
-    <span>
-    Already have an account?&nbsp;
-    <Link to="/login">
-    Log in!
-    </Link>
-    </span>
-  )
-}
-
 const DisplaySignUpLink = () => {
   const location = useLocation();
   //if (location.pathname.match(/signup/)){
@@ -78,7 +61,6 @@ const DisplayLogInButton = () => {
   )
 }
 
-const LogInLink = withRouter(DisplayLogInLink);
 const SignUpLink = withRouter(DisplaySignUpLink);
 const LogInButton = withRouter(DisplayLogInButton);
 const SignUpButton = withRouter(DisplaySignUpButton);
@@ -121,7 +103,6 @@ class App extends React.Component {
             </Route>
           </Switch>
           <nav>
-            <LogInLink />
             <SignUpLink />
             <SignUpButton />&nbsp;
             <LogInButton />

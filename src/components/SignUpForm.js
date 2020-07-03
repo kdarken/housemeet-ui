@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from 'react-dom';
-//import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import "typeface-montserrat";
+import "bootstrap/dist/css/bootstrap.css";
+
 class SignUpForm extends React.Component {
   constructor(props) {
     super(props);
@@ -32,33 +34,49 @@ class SignUpForm extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
-          <label>
-            Name:
-            <input type="text" name="name" className="form-control" value={this.state.name} onChange={this.handleChange} required />
-          </label>
+            <input 
+              type="text" 
+              name="name" 
+              className="form-control" 
+              placeholder="Name" 
+              value={this.state.name} 
+              onChange={this.handleChange} 
+              required 
+            />
         </div>
-
         <div className="form-group">
-          <label>
-            Email:
-            <input type="text" name="email" className="form-control" value={this.state.email} onChange={this.handleChange} required />
-          </label>
+            <input 
+              type="text" 
+              name="email" 
+              className="form-control" 
+              placeholder="Email" 
+              value={this.state.email} 
+              onChange={this.handleChange} 
+              required 
+            />
         </div>
-
         <div className="form-group">
-          <label>
-            Create a password:
-            <input type="text" name="password" className="form-control" value={this.state.password} onChange={this.handleChange} required />
-          </label>
+            <input 
+              type="text" 
+              name="password" 
+              className="form-control" 
+              placeholder="Enter password" 
+              value={this.state.password} 
+              onChange={this.handleChange} 
+              required 
+            />
         </div>
-
         <div className="form-group">
-          <label>
-            Confirm your password:
-            <input type="text" name = "passwordRepeated" className="form-control" value={this.state.passwordRepeated} onChange={this.handleChange} required />
-          </label>
+            <input 
+              type="text" 
+              name="passwordRepeated" 
+              className="form-control" 
+              placeholder="Confirm password" 
+              value={this.state.passwordRepeated} 
+              onChange={this.handleChange} 
+              required 
+            />
         </div>
-
         <button type="submit" className="btn btn-primary btn-block">Submit</button>
       </form>
     );
