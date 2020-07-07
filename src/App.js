@@ -8,26 +8,24 @@ import {
 } from "react-router-dom";
 import { withRouter } from "react-router";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import SignUpForm from './components/SignUpForm';
 import LoginPage from './containers/LoginPage';
 import SignUpPage from './containers/SignUpPage';
+import { Helmet } from "react-helmet";
+import logo from "./images/housemeet-logo.svg";
 
-const DisplaySignUpLink = () => {
-  const location = useLocation();
-  //if (location.pathname.match(/signup/)){
-  if (location.pathname !== "/login"){
-    return null;
-  }
 
+function DisplayLogo() {
   return (
-    <span>
-    Don't have an account?&nbsp;
-    <Link to="/signup">
-    Sign up!
-    </Link>
-    </span>
-  )
+    <img
+      src={logo}
+      className="Login-logo"
+      alt="logo"
+      class="rounded mx-auto d-block"
+      style={{ paddingTop: 70, alignContent: "center" }}
+    />
+  );
 }
+
 
 const DisplaySignUpButton = () => {
   const location = useLocation();
@@ -61,18 +59,9 @@ const DisplayLogInButton = () => {
   )
 }
 
-const SignUpLink = withRouter(DisplaySignUpLink);
 const LogInButton = withRouter(DisplayLogInButton);
 const SignUpButton = withRouter(DisplaySignUpButton);
 
-
-function SignUp() {
-  return <SignUpPage />;
-}
-
-function LogIn() {
-  return <LoginPage />;
-}
 
 function Welcome() {
   return <h2 className="pageTitle">Welcome to Housemeet!</h2>;
@@ -91,19 +80,24 @@ class App extends React.Component {
       {/* A <Switch> looks through its children <Route>s and
           renders the first one that matches the current URL. */}
         <div>
+          <Helmet>
+            <title>housemeet</title>
+          </Helmet>
+          <header className="Login-header">
+            <DisplayLogo />
+          </header>
           <Switch>
             <Route path="/signup">
-              <SignUp />
+              <SignUpPage />
             </Route>
             <Route path="/login">
-              <LogIn />
+              <LoginPage />
             </Route>
             <Route path="/">
               <Welcome />
             </Route>
           </Switch>
           <nav>
-            <SignUpLink />
             <SignUpButton />&nbsp;
             <LogInButton />
           </nav>

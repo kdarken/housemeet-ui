@@ -17,7 +17,7 @@ class SignUpPage extends Component {
     fontSize: 30,
     fontWeight: "regular",
     fontFamily: "montserrat",
-    paddingTop: 80
+    paddingTop: 40
   };
 
   loginTextStyle = {
