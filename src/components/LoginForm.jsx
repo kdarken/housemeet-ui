@@ -24,12 +24,23 @@ class LoginForm extends Component {
     const value = event.target.value;
     this.setState({
       ...this.state,
-      [event.target.name]: value,
+      [event.target.name]: value
     });
   }
 
   handleSubmit(event) {
-    alert("Successfully logged into " + this.state.name + "'s account");
+    alert("Logging into " + this.state.email + "'s account");
+    fetch('/users/login', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: this.state.email,
+        password: this.state.password,
+      })
+    })
     event.preventDefault();
   }
 

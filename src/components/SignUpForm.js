@@ -27,6 +27,18 @@ class SignUpForm extends React.Component {
 
   handleSubmit(event) {
     alert('An account is being created for ' + this.state.name);
+    fetch('/users/signup', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: this.state.name,
+        email: this.state.email,
+        password: this.state.password,
+      })
+    })
     event.preventDefault();
   }
 
