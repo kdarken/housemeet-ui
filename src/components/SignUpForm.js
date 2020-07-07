@@ -10,11 +10,13 @@ class SignUpForm extends React.Component {
       name: '',
       email: '',
       password: '',
-      passwordRepeated: ''
+      passwordRepeated: '',
+      passwordType: 'password'
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange(event) {
@@ -41,6 +43,11 @@ class SignUpForm extends React.Component {
     })
     event.preventDefault();
   }
+
+  handleClick = () =>
+  this.setState(({ passwordType }) => ({
+    passwordType: passwordType === "text" ? "password" : "text",
+  }));
 
   render() {
     return (
@@ -69,7 +76,7 @@ class SignUpForm extends React.Component {
         </div>
         <div className="form-group">
             <input 
-              type="text" 
+              type={this.state.passwordType} 
               name="password" 
               className="form-control" 
               placeholder="Enter password" 
@@ -80,7 +87,7 @@ class SignUpForm extends React.Component {
         </div>
         <div className="form-group">
             <input 
-              type="text" 
+              type={this.state.passwordType}
               name="passwordRepeated" 
               className="form-control" 
               placeholder="Confirm password" 
@@ -88,6 +95,23 @@ class SignUpForm extends React.Component {
               onChange={this.handleChange} 
               required 
             />
+        </div>
+        <div className="form-group">
+          <div className="form-check">
+            <input
+              type="checkbox"
+              id="checkbox"
+              className="form-check-input"
+              onClick={this.handleClick}
+            />
+            <label
+              className="form-check-label"
+              for="checkbox"
+              style={{ fontFamily: "montserrat" }}
+            >
+              Show password
+            </label>
+          </div>
         </div>
         <button type="submit" className="btn btn-primary btn-block">Submit</button>
       </form>
