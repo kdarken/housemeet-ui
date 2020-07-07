@@ -3,6 +3,8 @@
  */
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import { Redirect, BrowserRouter, Route } from "react-router-dom";
+
 import "bootstrap/dist/css/bootstrap.css";
 import "typeface-montserrat";
 
@@ -24,23 +26,23 @@ class LoginForm extends Component {
     const value = event.target.value;
     this.setState({
       ...this.state,
-      [event.target.name]: value
+      [event.target.name]: value,
     });
   }
 
   handleSubmit(event) {
     alert("Logging into " + this.state.email + "'s account");
-    fetch('/users/login', {
-      method: 'POST',
+    fetch("/users/login", {
+      method: "POST",
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email: this.state.email,
         password: this.state.password,
-      })
-    })
+      }),
+    });
     event.preventDefault();
   }
 
@@ -48,6 +50,10 @@ class LoginForm extends Component {
     this.setState(({ passwordtype }) => ({
       passwordtype: passwordtype === "text" ? "password" : "text",
     }));
+
+  redirectToTarget = () => {
+    this.props.history.push(`/target`);
+  };
 
   render() {
     return (
@@ -92,7 +98,11 @@ class LoginForm extends Component {
             </label>
           </div>
           <div style={{ paddingTop: 10, textAlign: "center" }}>
-            <button type="submit" className="btn btn-primary btn-lg mb-2">
+            <button
+              type="submit"
+              className="btn btn-primary btn-lg mb-2"
+              onClick={this.redirectToTarget}
+            >
               Submit
             </button>
           </div>

@@ -5,31 +5,28 @@ import "bootstrap/dist/css/bootstrap.css";
 import "typeface-montserrat";
 
 class LoginPage extends Component {
-
   pageTitleStyle = {
     fontSize: 30,
     fontWeight: "regular",
     fontFamily: "montserrat",
-    paddingTop: 40
+    paddingTop: 40,
   };
 
   signUpTextStyle = {
-    fontFamily: "montserrat"
+    fontFamily: "montserrat",
   };
 
   render() {
     return (
       <div className="Login">
-
         <div class="text-center text-secondary" style={this.pageTitleStyle}>
           Log into your account
         </div>
-        <Login />
+        <Login {...this.props} />
+
         <div class="text-center" style={this.signUpTextStyle}>
           Don't have an account?&nbsp;
-          <Link to="/signup">
-              Sign up!
-          </Link>
+          <Link to="/signup">Sign up!</Link>
         </div>
         <div class="text-center text-secondary" style={{ paddingTop: 30 }}>
           <span
