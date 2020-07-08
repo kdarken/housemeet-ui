@@ -1,15 +1,9 @@
 import React, { Component } from "react";
-import { Helmet } from "react-helmet";
-import logo from "../images/housemeet-logo.svg";
 import SignUpForm from "../components/SignUpForm";
 import "bootstrap/dist/css/bootstrap.css";
 import "typeface-montserrat";
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    useLocation
+    Link
   } from "react-router-dom";
 
 class SignUpPage extends Component {
@@ -32,7 +26,7 @@ class SignUpPage extends Component {
                 </div>
                 <div className="signUpContainer">
                     <div className="signUpInner">
-                        <SignUpForm />
+                        <SignUpForm {...this.props} />
                     </div>
                 </div>
                 <div class="text-center" style={this.loginTextStyle}>

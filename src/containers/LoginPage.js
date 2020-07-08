@@ -22,7 +22,11 @@ class LoginPage extends Component {
         <div class="text-center text-secondary" style={this.pageTitleStyle}>
           Log into your account
         </div>
-        <Login {...this.props} />
+        <div className="loginContainer">
+          <div className="loginInner">
+            <LoginForm {...this.props} />
+          </div>
+        </div>
 
         <div class="text-center" style={this.signUpTextStyle}>
           Don't have an account?&nbsp;
@@ -45,16 +49,6 @@ class LoginPage extends Component {
       </div>
     );
   }
-}
-
-function Login() {
-  return (
-    <div className="loginContainer">
-      <div className="loginInner">
-        <LoginForm />
-      </div>
-    </div>
-  );
 }
 
 export default LoginPage;

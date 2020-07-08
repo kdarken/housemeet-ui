@@ -27,44 +27,25 @@ function DisplayLogo() {
 }
 
 
-const DisplaySignUpButton = () => {
-  const location = useLocation();
-  //if (location.pathname.match(/signup/)){
-  if (location.pathname !== "/"){
-    return null;
-  }
-
+function Welcome() {
   return (
-    <Link to="/signup">
+  <div>
+  <h2 className="pageTitle">Welcome to Housemeet!</h2>
+  <nav>
+  <Link to="/signup">
       <button type="button" class="btn btn-primary">
         Sign Up
       </button>
-    </Link>
-  )
-}
-
-const DisplayLogInButton = () => {
-  const location = useLocation();
-  //if (location.pathname.match(/signup/)){
-  if (location.pathname !== "/"){
-    return null;
-  }
-
-  return (
-    <Link to="/login">
-      <button type="button" class="btn btn-primary">
-        Log In
-      </button>
-    </Link>
-  )
-}
-
-const LogInButton = withRouter(DisplayLogInButton);
-const SignUpButton = withRouter(DisplaySignUpButton);
-
-
-function Welcome() {
-  return <h2 className="pageTitle">Welcome to Housemeet!</h2>;
+  </Link> 
+  &nbsp;
+  <Link to="/login">
+    <button type="button" class="btn btn-primary">
+      Log In
+    </button>
+  </Link>
+  </nav>
+  </div>
+  );
 }
 
 
@@ -87,20 +68,14 @@ class App extends React.Component {
             <DisplayLogo />
           </header>
           <Switch>
-            <Route path="/signup">
-              <SignUpPage />
+            <Route path="/home">
             </Route>
-            <Route path="/login">
-              <LoginPage />
-            </Route>
+            <Route path="/signup" render={props => <SignUpPage {...props} />}/>
+            <Route path="/login" render={props => <LoginPage {...props} />}/>
             <Route path="/">
               <Welcome />
             </Route>
           </Switch>
-          <nav>
-            <SignUpButton />&nbsp;
-            <LogInButton />
-          </nav>
         </div>
       </Router>
     );

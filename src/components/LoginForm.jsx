@@ -3,10 +3,9 @@
  */
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import { Redirect, BrowserRouter, Route } from "react-router-dom";
-
 import "bootstrap/dist/css/bootstrap.css";
 import "typeface-montserrat";
+import axios from 'axios';
 
 class LoginForm extends Component {
   constructor(props) {
@@ -31,29 +30,25 @@ class LoginForm extends Component {
   }
 
   handleSubmit(event) {
-    alert("Logging into " + this.state.email + "'s account");
-    fetch("/users/login", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password,
-      }),
-    });
     event.preventDefault();
+    axios.post('/users/login', {
+      email: this.state.email,
+      password: this.state.password
+    })
+    .then((response) => {
+      console.log(response);
+      alert("Logging you in...");
+      this.props.history.push('/home');
+    }, (error) => {
+      console.log(error);
+      alert("Invalid credentials.");
+    });
   }
 
   handleClick = () =>
     this.setState(({ passwordtype }) => ({
       passwordtype: passwordtype === "text" ? "password" : "text",
     }));
-
-  redirectToTarget = () => {
-    this.props.history.push(`/target`);
-  };
 
   render() {
     return (
@@ -101,7 +96,6 @@ class LoginForm extends Component {
             <button
               type="submit"
               className="btn btn-primary btn-lg mb-2"
-              onClick={this.redirectToTarget}
             >
               Submit
             </button>

@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from 'react-dom';
 import "typeface-montserrat";
 import "bootstrap/dist/css/bootstrap.css";
+import axios from 'axios';
 
 class SignUpForm extends React.Component {
   constructor(props) {
@@ -28,20 +29,22 @@ class SignUpForm extends React.Component {
   }
 
   handleSubmit(event) {
-    alert('An account is being created for ' + this.state.name);
-    fetch('/users/signup', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: this.state.name,
-        email: this.state.email,
-        password: this.state.password,
-      })
-    })
     event.preventDefault();
+    axios.post('/users/signup', {
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password
+    })
+    .then((response) => {
+      console.log(response);
+      alert("Your account has been created! Logging you in...");
+      this.props.history.push('/home');
+
+    }, (error) => {
+      console.log(error);
+      alert("Unable to create account. Make sure your email is valid, your password is at least 7 characters, and you entered your password in correctly twice.");
+    });
+    
   }
 
   handleClick = () =>
