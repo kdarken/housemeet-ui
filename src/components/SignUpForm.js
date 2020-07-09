@@ -30,6 +30,10 @@ class SignUpForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    if (this.state.passwordRepeated !== this.state.password) {
+      alert("Your passwords do not match.");
+      return;
+    }
     axios.post('/users/signup', {
       name: this.state.name,
       email: this.state.email,
@@ -116,7 +120,9 @@ class SignUpForm extends React.Component {
             </label>
           </div>
         </div>
-        <button type="submit" className="btn btn-primary btn-block">Submit</button>
+        <div style={{textAlign: "center"}}>
+          <button type="submit" className="btn btn-primary">Submit</button>
+        </div>
       </form>
     );
   }

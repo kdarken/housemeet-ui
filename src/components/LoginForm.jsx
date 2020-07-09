@@ -57,8 +57,8 @@ class LoginForm extends Component {
           <input
             type="text"
             name="email"
-            placeholder="email"
-            className="form-control form-control-lg text-center"
+            placeholder="Email"
+            className="form-control"
             value={this.state.email}
             onChange={this.handleChange}
             required
@@ -68,9 +68,9 @@ class LoginForm extends Component {
           <input
             type={this.state.passwordtype}
             name="password"
-            className="form-control form-control-lg text-center"
+            className="form-control"
             id="password"
-            placeholder="password"
+            placeholder="Password"
             value={this.state.password}
             onChange={this.handleChange}
             required
@@ -95,7 +95,7 @@ class LoginForm extends Component {
           <div style={{ paddingTop: 10, textAlign: "center" }}>
             <button
               type="submit"
-              className="btn btn-primary btn-lg mb-2"
+              className="btn btn-primary mb-2"
             >
               Submit
             </button>

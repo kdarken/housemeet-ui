@@ -32,19 +32,9 @@ class LoginPage extends Component {
           Don't have an account?&nbsp;
           <Link to="/signup">Sign up!</Link>
         </div>
-        <div class="text-center text-secondary" style={{ paddingTop: 30 }}>
-          <span
-            style={{
-              fontFamily: "montserrat",
-              fontStyle: "normal",
-              fontWeight: "bold",
-              fontSize: 25,
-              textAlign: "center",
-            }}
-          >
-            Forgot your password? &nbsp;
-            <Link to="/password_recovery">Click here!</Link>
-          </span>
+        <div class="text-center" style={this.signUpTextStyle}>
+          Forgot your password? &nbsp;
+          <Link to="/password_recovery">Click here!</Link>
         </div>
       </div>
     );
