@@ -88,7 +88,7 @@ function RenderInput(name, groupClass, colSize1, colSize2) {
         </label>
         <div class={colSize2}>
           <input
-            type="email"
+            type="text"
             class="form-control"
             id="inputEmail3"
             placeholder={name}
