@@ -10,6 +10,7 @@ import { withRouter } from "react-router";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import LoginPage from './containers/LoginPage';
 import SignUpPage from './containers/SignUpPage';
+import ProfilePage from './containers/ProfilePage';
 import { Helmet } from "react-helmet";
 import logo from "./images/housemeet-logo.svg";
 
@@ -69,6 +70,9 @@ class App extends React.Component {
           </header>
           <Switch>
             <Route path="/home">
+            </Route>
+            <Route path="/profile">
+              <ProfilePage />
             </Route>
             <Route path="/signup" render={props => <SignUpPage {...props} />}/>
             <Route path="/login" render={props => <LoginPage {...props} />}/>
