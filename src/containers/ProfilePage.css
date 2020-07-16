@@ -1,47 +1,4 @@
 .ProfilePage {
-<<<<<<< HEAD
-    font-family: montserrat;
-  }
-  
-  .ProfilePage h2 {
-    padding-left: 50px;
-  }
-  
-  .ProfilePage h2:after {
-    background-color: #c4c4c4;
-    content: "";
-    display: inline-block;
-    height: 2.5px;
-    position: relative;
-    vertical-align: middle;
-    width: 84%;
-    left: 1em;
-    margin-right: -50%;
-  }
-  
-  .profileContainer {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    text-align: left;
-  
-    padding-top: 30px;
-    padding-bottom: 20px;
-  }
-  
-  .profileInnner {
-    width: 1350px;
-    margin: auto;
-    background: #f8faff;
-    border: 3px solid #4f70c5;
-    box-sizing: border-box;
-    border-radius: 30px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    padding: 40px 55px 15px 55px;
-    border-radius: 15px;
-    transition: all 0.3s;
-  }
-=======
   font-family: montserrat;
 }
 
@@ -83,4 +40,3 @@
   border-radius: 15px;
   transition: all 0.3s;
 }
->>>>>>> create_profile

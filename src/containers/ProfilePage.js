@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import "./ProfilePage.css";
 import UserProfileForm from "../components/UserProfileForm";
-<<<<<<< HEAD
 import LivingHabitsForm from "../components/LivingHabitsForm";
-=======
->>>>>>> create_profile
 
 class ProfilePage extends Component {
   state = {
@@ -29,11 +26,8 @@ class ProfilePage extends Component {
         <h2 className="headerProp">User Profile</h2>
         <div className="profileContainer">
           <div className="profileInnner">
-<<<<<<< HEAD
             <LivingHabitsForm />
-=======
             <UserProfileForm />
->>>>>>> create_profile
           </div>
         </div>
       </div>
@@ -41,8 +35,4 @@ class ProfilePage extends Component {
   }
 }
 
-<<<<<<< HEAD
 export default ProfilePage;
-=======
-export default ProfilePage;
->>>>>>> create_profile

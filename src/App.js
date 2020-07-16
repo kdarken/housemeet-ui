@@ -7,17 +7,12 @@ import {
   useLocation,
 } from "react-router-dom";
 import { withRouter } from "react-router";
-<<<<<<< HEAD
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import LoginPage from './containers/LoginPage';
-import SignUpPage from './containers/SignUpPage';
-import ProfilePage from './containers/ProfilePage';
-=======
+
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import LoginPage from "./containers/LoginPage";
 import SignUpPage from "./containers/SignUpPage";
 import ProfilePage from "./containers/ProfilePage";
->>>>>>> create_profile
+
 import { Helmet } from "react-helmet";
 import logo from "./images/housemeet-logo.svg";
 
@@ -77,19 +72,16 @@ class App extends React.Component {
             <Route path="/profile">
               <ProfilePage />
             </Route>
-<<<<<<< HEAD
+
             <Route path="/profile">
               <ProfilePage />
             </Route>
-            <Route path="/signup" render={props => <SignUpPage {...props} />}/>
-            <Route path="/login" render={props => <LoginPage {...props} />}/>
-=======
             <Route
               path="/signup"
               render={(props) => <SignUpPage {...props} />}
             />
             <Route path="/login" render={(props) => <LoginPage {...props} />} />
->>>>>>> create_profile
+
             <Route path="/">
               <Welcome />
             </Route>
