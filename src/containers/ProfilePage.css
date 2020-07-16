@@ -72,3 +72,7 @@
   border-radius: 0.25rem;
   text-indent: 5%;
 }
+
+.Btn-Blue-BG.active {
+  background-color: blue !important;
+}

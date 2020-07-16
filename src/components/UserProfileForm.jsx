@@ -1,4 +1,12 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
+
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from "reactstrap";
+
 import ReactDOM from "react-dom";
 
 import axios from "axios";
@@ -71,7 +79,55 @@ class UserProfileForm extends Component {
   }
 
   renderDate = () => {
-    return <DatePicker onChange={this.handleChangeDate} />;
+    return (
+      <div class="form-group col-md-4">
+        <div class="form-group row">
+          <label for="dateOfBirth" className="col-sm-5.5 col-form-label">
+            Date of Birth
+          </label>
+          <div class="col">
+            <DatePicker
+              selected={this.state.dateOfBirth}
+              onChange={this.handleChangeDate}
+              placeholderText="Click to select a date"
+              showMonthDropdown
+              showYearDropdown
+              dropdownMode="select"
+            />
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  renderDropDown = () => {
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+
+    const toggle = () => setDropdownOpen((prevState) => !prevState);
+    return (
+      <div class="form-group col-md-8">
+        <div class="form-group row">
+          <label
+            for="roommateOrHousemate"
+            className="col-sm-5.5 col-form-label"
+          >
+            Looking for a Roommate of Housemate
+          </label>
+          <div class="col">
+            <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+              <DropdownToggle caret outline color="primary">
+                Click to select your preference
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem>Roommate</DropdownItem>
+                <DropdownItem>Housemate</DropdownItem>
+                <DropdownItem>Either Roommate or Housemate</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </div>
+        </div>
+      </div>
+    );
   };
 
   renderInput(name, stateName, groupClassInput, colSize1, colSize2, value) {
@@ -124,26 +180,7 @@ class UserProfileForm extends Component {
                   "col-sm-7",
                   this.state.lastName
                 )}
-                <div class="form-group col-md-4">
-                  <div class="form-group row">
-                    <label
-                      for="dateOfBirth"
-                      className="col-sm-5.5 col-form-label"
-                    >
-                      Date of Birth
-                    </label>
-                    <div class="col">
-                      <DatePicker
-                        selected={this.state.dateOfBirth}
-                        onChange={this.handleChangeDate}
-                        placeholderText="Click to select a date"
-                        showMonthDropdown
-                        showYearDropdown
-                        dropdownMode="select"
-                      />
-                    </div>
-                  </div>
-                </div>
+                <this.renderDate />
               </div>
               <div class="form-row">
                 {this.renderInput(
@@ -154,14 +191,7 @@ class UserProfileForm extends Component {
                   "col-8",
                   this.state.lifeStyle
                 )}
-                {this.renderInput(
-                  "Looking for a Roommate of Housemate",
-                  "roommateOrHousemate",
-                  "col-md-8",
-                  "col-sm-5.5",
-                  "col",
-                  this.state.roommateOrHousemate
-                )}
+                <this.renderDropDown />
               </div>
               <div class="form-row">
                 {this.renderInput(
