@@ -41,7 +41,7 @@ class UserProfileForm extends Component {
         lastName: this.state.lastName,
         dateOfBirth: this.state.dateOfBirth,
         lifeStyle: this.state.lifeStyle,
-        roomateOrHousemate: this.state.roomateOrHousemate,
+        roommateOrHousemate: this.state.roommateOrHousemate,
         bio: this.state.bio,
         currentCity: this.state.currentCity,
         newCity: this.state.newCity,
