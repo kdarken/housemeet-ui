@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
 import axios from "axios";
+import DatePicker from "react-datepicker";
 
+import "react-datepicker/dist/react-datepicker.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "typeface-montserrat";
 
@@ -24,6 +26,7 @@ class UserProfileForm extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChangeDate = this.handleChangeDate.bind(this);
   }
 
   handleChange(event) {
@@ -33,6 +36,12 @@ class UserProfileForm extends Component {
       [event.target.name]: value,
     });
   }
+
+  handleChangeDate = (date) => {
+    this.setState({
+      dateOfBirth: date,
+    });
+  };
 
   handleSubmit(event) {
     event.preventDefault();
@@ -61,13 +70,17 @@ class UserProfileForm extends Component {
       );
   }
 
+  renderDate = () => {
+    return <DatePicker onChange={this.handleChangeDate} />;
+  };
+
   renderInput(name, stateName, groupClassInput, colSize1, colSize2, value) {
     var size1 = colSize1 + " col-form-label";
     var groupClass = "form-group " + groupClassInput;
     return (
       <div class={groupClass}>
         <div class="form-group row">
-          <label for="inputEmail3" class={size1}>
+          <label for={stateName} class={size1}>
             {name}
           </label>
           <div class={colSize2}>
@@ -111,14 +124,26 @@ class UserProfileForm extends Component {
                   "col-sm-7",
                   this.state.lastName
                 )}
-                {this.renderInput(
-                  "Date of Birth",
-                  "dateOfBirth",
-                  "col-md-4",
-                  "col-sm-5.5",
-                  "col-sm-7",
-                  this.state.dateOfBirth
-                )}
+                <div class="form-group col-md-4">
+                  <div class="form-group row">
+                    <label
+                      for="dateOfBirth"
+                      className="col-sm-5.5 col-form-label"
+                    >
+                      Date of Birth
+                    </label>
+                    <div class="col">
+                      <DatePicker
+                        selected={this.state.dateOfBirth}
+                        onChange={this.handleChangeDate}
+                        placeholderText="Click to select a date"
+                        showMonthDropdown
+                        showYearDropdown
+                        dropdownMode="select"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="form-row">
                 {this.renderInput(
