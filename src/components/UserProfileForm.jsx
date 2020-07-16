@@ -1,12 +1,5 @@
 import React, { Component, useState } from "react";
 
-import {
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-} from "reactstrap";
-
 import ReactDOM from "react-dom";
 
 import axios from "axios";
@@ -78,14 +71,42 @@ class UserProfileForm extends Component {
       );
   }
 
+  renderBio = () => {
+    return (
+      <div className="form-row">
+        <div className="form-group col-md-12">
+          <div className="form-group row">
+            <label for="bio" className="col-sm-5.5 col-form-label">
+              Tell us About yourself
+            </label>
+            <div class="col">
+              <textarea
+                className="form-control"
+                id="bio"
+                name="bio"
+                type="text"
+                rows="3"
+                value={this.state.bio}
+                placeholder="Tell your future Housemate/Roommate about yourself! (500 character limit)"
+                onChange={this.handleChange}
+                maxlength="500"
+                required
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   renderDate = () => {
     return (
-      <div class="form-group col-md-4">
-        <div class="form-group row">
+      <div className="form-group col-md-4">
+        <div className="form-group row">
           <label for="dateOfBirth" className="col-sm-5.5 col-form-label">
             Date of Birth
           </label>
-          <div class="col">
+          <div className="col">
             <DatePicker
               selected={this.state.dateOfBirth}
               onChange={this.handleChangeDate}
@@ -101,47 +122,47 @@ class UserProfileForm extends Component {
   };
 
   renderDropDown = () => {
-    const [dropdownOpen, setDropdownOpen] = useState(false);
-
-    const toggle = () => setDropdownOpen((prevState) => !prevState);
     return (
-      <div class="form-group col-md-8">
-        <div class="form-group row">
+      <div className="form-group col-md-8">
+        <div className="form-group row">
           <label
             for="roommateOrHousemate"
             className="col-sm-5.5 col-form-label"
           >
             Looking for a Roommate of Housemate
           </label>
-          <div class="col">
-            <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-              <DropdownToggle caret outline color="primary">
-                Click to select your preference
-              </DropdownToggle>
-              <DropdownMenu>
-                <DropdownItem>Roommate</DropdownItem>
-                <DropdownItem>Housemate</DropdownItem>
-                <DropdownItem>Either Roommate or Housemate</DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
+          <div className="col-sm-5">
+            <select className="form-control" id="exampleFormControlSelect1">
+              <option>Roommate</option>
+              <option>Housemate</option>
+              <option>Either</option>
+            </select>
           </div>
         </div>
       </div>
     );
   };
 
-  renderInput(name, stateName, groupClassInput, colSize1, colSize2, value) {
+  renderInput(
+    name,
+    stateName,
+    groupClassInput,
+    colSize1,
+    colSize2,
+    value,
+    inputType = "text"
+  ) {
     var size1 = colSize1 + " col-form-label";
     var groupClass = "form-group " + groupClassInput;
     return (
-      <div class={groupClass}>
-        <div class="form-group row">
-          <label for={stateName} class={size1}>
+      <div className={groupClass}>
+        <div className="form-group row">
+          <label for={stateName} className={size1}>
             {name}
           </label>
-          <div class={colSize2}>
+          <div className={colSize2}>
             <input
-              type="text"
+              type={inputType}
               name={stateName}
               id={stateName}
               className="form-control"
@@ -159,11 +180,11 @@ class UserProfileForm extends Component {
   render() {
     return (
       <div>
-        <div class="row">
-          <div class="col-sm-3">One of three columns</div>
-          <div class="col-sm-9">
+        <div className="row">
+          <div className="col-sm-3">One of three columns</div>
+          <div className="col-sm-9">
             <form onSubmit={this.handleSubmit}>
-              <div class="form-row">
+              <div className="form-row">
                 {this.renderInput(
                   "First Name",
                   "firstName",
@@ -182,7 +203,7 @@ class UserProfileForm extends Component {
                 )}
                 <this.renderDate />
               </div>
-              <div class="form-row">
+              <div className="form-row">
                 {this.renderInput(
                   "Lifestyle",
                   "lifeStyle",
@@ -193,17 +214,9 @@ class UserProfileForm extends Component {
                 )}
                 <this.renderDropDown />
               </div>
-              <div class="form-row">
-                {this.renderInput(
-                  "Tell us About yourself",
-                  "bio",
-                  "col-md-12",
-                  "col-sm-5.5",
-                  "col",
-                  this.state.bio
-                )}
-              </div>
-              <div class="form-row">
+
+              <this.renderBio />
+              <div className="form-row">
                 {this.renderInput(
                   "Current City",
                   "currentCity",
@@ -226,10 +239,11 @@ class UserProfileForm extends Component {
                   "col-md-4",
                   "col-sm-5.5",
                   "col-sm-7",
-                  this.state.budget
+                  this.state.budget,
+                  Number
                 )}
               </div>
-              <button type="submit" class="btn btn-primary">
+              <button type="submit" className="btn btn-primary">
                 Submit Profile
               </button>
             </form>
