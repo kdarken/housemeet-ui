@@ -18,7 +18,7 @@ class ProfilePage extends Component {
   render() {
     return (
       <div className="ProfilePage">
-        <div style={{ position: "absolute", left: 1500, top: 55 }}>
+        <div style={{ position: "absolute", left: "90%", top: "10%" }}>
           <p>
             Hi <span style={{ fontWeight: "bold" }}>Karen</span>
           </p>

@@ -61,9 +61,9 @@ class UserProfileForm extends Component {
       );
   }
 
-  renderInput(name, stateName, groupClass, colSize1, colSize2, value) {
+  renderInput(name, stateName, groupClassInput, colSize1, colSize2, value) {
     var size1 = colSize1 + " col-form-label";
-    var groupClass = "form-group " + groupClass;
+    var groupClass = "form-group " + groupClassInput;
     return (
       <div class={groupClass}>
         <div class="form-group row">
