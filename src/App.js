@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useLocation,
-} from "react-router-dom";
-import { withRouter } from "react-router";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import LoginPage from "./containers/LoginPage";
@@ -24,7 +17,12 @@ function DisplayLogo() {
       className="Login-logo"
       alt="logo"
       class="rounded mx-auto d-block"
-      style={{ paddingTop: 70, alignContent: "center" }}
+      style={{
+        paddingTop: 70,
+        alignContent: "center",
+        maxWidth: "100%",
+        height: "auto",
+      }}
     />
   );
 }

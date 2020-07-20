@@ -1,8 +1,14 @@
 import React, { Component } from "react";
+
 import ReactDOM from "react-dom";
 
 import axios from "axios";
+import DatePicker from "react-datepicker";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight, faImage } from "@fortawesome/free-solid-svg-icons";
+
+import "react-datepicker/dist/react-datepicker.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "typeface-montserrat";
 
@@ -24,6 +30,7 @@ class UserProfileForm extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChangeDate = this.handleChangeDate.bind(this);
   }
 
   handleChange(event) {
@@ -33,6 +40,12 @@ class UserProfileForm extends Component {
       [event.target.name]: value,
     });
   }
+
+  handleChangeDate = (date) => {
+    this.setState({
+      dateOfBirth: date,
+    });
+  };
 
   handleSubmit(event) {
     event.preventDefault();
@@ -61,18 +74,102 @@ class UserProfileForm extends Component {
       );
   }
 
-  renderInput(name, stateName, groupClass, colSize1, colSize2, value) {
-    var size1 = colSize1 + " col-form-label";
-    var groupClass = "form-group " + groupClass;
+  renderBio = () => {
     return (
-      <div class={groupClass}>
-        <div class="form-group row">
-          <label for="inputEmail3" class={size1}>
-            {name}
+      <div className="form-row">
+        <div className="form-group col-md-12">
+          <div className="form-group row">
+            <label for="bio" className="col-sm-5.5 col-form-label">
+              <b>Tell us About yourself</b>
+            </label>
+            <div class="col">
+              <textarea
+                className="form-control"
+                id="bio"
+                name="bio"
+                type="text"
+                rows="3"
+                value={this.state.bio}
+                placeholder="Tell your future Housemate/Roommate about yourself! (500 character limit)"
+                onChange={this.handleChange}
+                maxlength="500"
+                required
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  renderDate = () => {
+    return (
+      <div className="form-group col-md-4">
+        <div className="form-group row">
+          <label for="dateOfBirth" className="col-sm-5.5 col-form-label">
+            <b>Date of Birth</b>
           </label>
-          <div class={colSize2}>
+          <div className="col">
+            <DatePicker
+              selected={this.state.dateOfBirth}
+              onChange={this.handleChangeDate}
+              placeholderText="Click to select a date"
+              showMonthDropdown
+              showYearDropdown
+              dropdownMode="select"
+            />
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  renderDropDown = () => {
+    return (
+      <div className="form-group col-md-8">
+        <div className="form-group row">
+          <label
+            for="roommateOrHousemate"
+            className="col-sm-5.5 col-form-label"
+          >
+            <b>Looking for a Roommate of Housemate</b>
+          </label>
+          <div className="col-sm-5">
+            <select className="form-control" id="exampleFormControlSelect1">
+              <option>Roommate</option>
+              <option>Housemate</option>
+              <option>Either</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  SVGComponent = () => {
+    return <svg {...this.props}>{this.props.children}</svg>;
+  };
+
+  renderInput(
+    name,
+    stateName,
+    groupClassInput,
+    colSize1,
+    colSize2,
+    value,
+    inputType = "text"
+  ) {
+    var size1 = colSize1 + " col-form-label";
+    var groupClass = "form-group " + groupClassInput;
+    return (
+      <div className={groupClass}>
+        <div className="form-group row">
+          <label for={stateName} className={size1}>
+            <b>{name}</b>
+          </label>
+          <div className={colSize2}>
             <input
-              type="text"
+              type={inputType}
               name={stateName}
               id={stateName}
               className="form-control"
@@ -89,12 +186,33 @@ class UserProfileForm extends Component {
 
   render() {
     return (
-      <div>
-        <div class="row">
-          <div class="col-sm-3">One of three columns</div>
-          <div class="col-sm-9">
+      <div class="container-fluid" style={{ flexShrink: 1 }}>
+        <div className="row">
+          <div className="col-md-3 ">
+            <div
+              class="card border-secondary mb-3"
+              style={{ maxWidth: "18rem", textAlign: "center" }}
+            >
+              <div class="card-header">Upload Profile Photo</div>
+              <div class="card-body">
+                <h5 class="card-title">
+                  <FontAwesomeIcon
+                    icon={faImage}
+                    style={{ width: "20%", height: "auto" }}
+                  />
+                  <br />
+                  <br />
+                  Drag and Drop Photo <br />
+                  or
+                </h5>
+                <input type="file" onChange={this.onFileChange} />
+              </div>
+            </div>
+          </div>
+
+          <div className="col-md-9">
             <form onSubmit={this.handleSubmit}>
-              <div class="form-row">
+              <div className="form-row">
                 {this.renderInput(
                   "First Name",
                   "firstName",
@@ -111,16 +229,9 @@ class UserProfileForm extends Component {
                   "col-sm-7",
                   this.state.lastName
                 )}
-                {this.renderInput(
-                  "Date of Birth",
-                  "dateOfBirth",
-                  "col-md-4",
-                  "col-sm-5.5",
-                  "col-sm-7",
-                  this.state.dateOfBirth
-                )}
+                <this.renderDate />
               </div>
-              <div class="form-row">
+              <div className="form-row">
                 {this.renderInput(
                   "Lifestyle",
                   "lifeStyle",
@@ -129,26 +240,11 @@ class UserProfileForm extends Component {
                   "col-8",
                   this.state.lifeStyle
                 )}
-                {this.renderInput(
-                  "Looking for a Roommate of Housemate",
-                  "roommateOrHousemate",
-                  "col-md-8",
-                  "col-sm-5.5",
-                  "col",
-                  this.state.roommateOrHousemate
-                )}
+                <this.renderDropDown />
               </div>
-              <div class="form-row">
-                {this.renderInput(
-                  "Tell us About yourself",
-                  "bio",
-                  "col-md-12",
-                  "col-sm-5.5",
-                  "col",
-                  this.state.bio
-                )}
-              </div>
-              <div class="form-row">
+
+              <this.renderBio />
+              <div className="form-row">
                 {this.renderInput(
                   "Current City",
                   "currentCity",
@@ -171,10 +267,11 @@ class UserProfileForm extends Component {
                   "col-md-4",
                   "col-sm-5.5",
                   "col-sm-7",
-                  this.state.budget
+                  this.state.budget,
+                  Number
                 )}
               </div>
-              <button type="submit" class="btn btn-primary">
+              <button type="submit" className="btn btn-primary">
                 Submit Profile
               </button>
             </form>
