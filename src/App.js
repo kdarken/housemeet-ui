@@ -81,7 +81,7 @@ class App extends React.Component {
           </header>
           <Switch>
             <RestrictedRoute exact path="/home" component={Logout} requiresLogin={true} redirectPath="/" />
-            <RestrictedRoute exact path="/profile" component={ProfilePage} requiresLogin={true} redirectPath="/" />
+            <RestrictedRoute exact path="/profile/edit" component={ProfilePage} requiresLogin={true} redirectPath="/" />
             <RestrictedRoute exact path="/signup" component={SignUpPage} requiresLogin={false} redirectPath="/home" /> 
             <RestrictedRoute exact path="/login" component={LoginPage} requiresLogin={false} redirectPath="/home" />
             <RestrictedRoute exact path="/" component={Welcome} requiresLogin={false} redirectPath="/home" />
