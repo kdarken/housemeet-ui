@@ -1,9 +1,12 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 
 import ReactDOM from "react-dom";
 
 import axios from "axios";
 import DatePicker from "react-datepicker";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight, faImage } from "@fortawesome/free-solid-svg-icons";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "bootstrap/dist/css/bootstrap.css";
@@ -77,7 +80,7 @@ class UserProfileForm extends Component {
         <div className="form-group col-md-12">
           <div className="form-group row">
             <label for="bio" className="col-sm-5.5 col-form-label">
-              Tell us About yourself
+              <b>Tell us About yourself</b>
             </label>
             <div class="col">
               <textarea
@@ -104,7 +107,7 @@ class UserProfileForm extends Component {
       <div className="form-group col-md-4">
         <div className="form-group row">
           <label for="dateOfBirth" className="col-sm-5.5 col-form-label">
-            Date of Birth
+            <b>Date of Birth</b>
           </label>
           <div className="col">
             <DatePicker
@@ -129,7 +132,7 @@ class UserProfileForm extends Component {
             for="roommateOrHousemate"
             className="col-sm-5.5 col-form-label"
           >
-            Looking for a Roommate of Housemate
+            <b>Looking for a Roommate of Housemate</b>
           </label>
           <div className="col-sm-5">
             <select className="form-control" id="exampleFormControlSelect1">
@@ -141,6 +144,10 @@ class UserProfileForm extends Component {
         </div>
       </div>
     );
+  };
+
+  SVGComponent = () => {
+    return <svg {...this.props}>{this.props.children}</svg>;
   };
 
   renderInput(
@@ -158,7 +165,7 @@ class UserProfileForm extends Component {
       <div className={groupClass}>
         <div className="form-group row">
           <label for={stateName} className={size1}>
-            {name}
+            <b>{name}</b>
           </label>
           <div className={colSize2}>
             <input
@@ -179,10 +186,31 @@ class UserProfileForm extends Component {
 
   render() {
     return (
-      <div>
+      <div class="container-fluid" style={{ flexShrink: 1 }}>
         <div className="row">
-          <div className="col-sm-3">One of three columns</div>
-          <div className="col-sm-9">
+          <div className="col-md-3 ">
+            <div
+              class="card border-secondary mb-3"
+              style={{ maxWidth: "18rem", textAlign: "center" }}
+            >
+              <div class="card-header">Upload Profile Photo</div>
+              <div class="card-body">
+                <h5 class="card-title">
+                  <FontAwesomeIcon
+                    icon={faImage}
+                    style={{ width: "20%", height: "auto" }}
+                  />
+                  <br />
+                  <br />
+                  Drag and Drop Photo <br />
+                  or
+                </h5>
+                <input type="file" onChange={this.onFileChange} />
+              </div>
+            </div>
+          </div>
+
+          <div className="col-md-9">
             <form onSubmit={this.handleSubmit}>
               <div className="form-row">
                 {this.renderInput(
