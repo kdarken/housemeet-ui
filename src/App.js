@@ -12,6 +12,7 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import LoginPage from "./containers/LoginPage";
 import SignUpPage from "./containers/SignUpPage";
 import ProfilePage from "./containers/ProfilePage";
+import RestrictedRoute from "./components/RestrictedRoute"
 
 import { Helmet } from "react-helmet";
 import logo from "./images/housemeet-logo.svg";
@@ -25,6 +26,21 @@ function DisplayLogo() {
       class="rounded mx-auto d-block"
       style={{ paddingTop: 70, alignContent: "center" }}
     />
+  );
+}
+
+function Logout() {
+  //if (!localStorage.getItem('token')) {
+   //return null
+  //}
+  return (
+    <div style={{textAlign: "center"}}>
+        <Link to="/">
+          <button type="button" class="btn btn-primary" onClick={() => {localStorage.clear()}}>
+            Logout
+          </button>
+        </Link>
+    </div>
   );
 }
 
@@ -58,8 +74,6 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        {/* A <Switch> looks through its children <Route>s and
-          renders the first one that matches the current URL. */}
         <div>
           <Helmet>
             <title>housemeet</title>
@@ -68,23 +82,11 @@ class App extends React.Component {
             <DisplayLogo />
           </header>
           <Switch>
-            <Route path="/home"></Route>
-            <Route path="/profile">
-              <ProfilePage />
-            </Route>
-
-            <Route path="/profile">
-              <ProfilePage />
-            </Route>
-            <Route
-              path="/signup"
-              render={(props) => <SignUpPage {...props} />}
-            />
-            <Route path="/login" render={(props) => <LoginPage {...props} />} />
-
-            <Route path="/">
-              <Welcome />
-            </Route>
+            <RestrictedRoute exact path="/home" component={Logout} requiresLogin={true} redirectPath="/" />
+            <RestrictedRoute exact path="/profile" component={ProfilePage} requiresLogin={true} redirectPath="/" />
+            <RestrictedRoute exact path="/signup" component={SignUpPage} requiresLogin={false} redirectPath="/home" /> 
+            <RestrictedRoute exact path="/login" component={LoginPage} requiresLogin={false} redirectPath="/home" />
+            <RestrictedRoute exact path="/" component={Welcome} requiresLogin={false} redirectPath="/home" />
           </Switch>
         </div>
       </Router>

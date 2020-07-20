@@ -42,7 +42,8 @@ class SignUpForm extends React.Component {
     .then((response) => {
       console.log(response);
       alert("Your account has been created! Logging you in...");
-      this.props.history.push('/home');
+      console.log(response.data.user.email)
+      //this.props.history.push('/home');
 
     }, (error) => {
       console.log(error);
