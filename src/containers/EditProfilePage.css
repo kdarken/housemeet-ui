@@ -1,12 +1,12 @@
-.ProfilePage {
+.editProfilePage {
   font-family: montserrat;
 }
 
-.ProfilePage h2 {
+.editProfilePage h2 {
   padding-left: 50px;
 }
 
-.ProfilePage h2:after {
+.editProfilePage h2:after {
   background-color: #c4c4c4;
   content: "";
   display: inline-block;
@@ -18,7 +18,7 @@
   margin-right: -50%;
 }
 
-.profileContainer {
+.editProfileContainer {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -28,11 +28,11 @@
   padding-bottom: 20px;
 }
 
-.profileContainer .btn-circle {
+.editProfileContainer .btn-circle {
   float: right;
 }
 
-.profileInnner {
+.editProfileInner {
   width: 80%;
   margin: auto;
   background: #f8faff;

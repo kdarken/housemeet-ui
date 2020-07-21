@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import "./ProfilePage.css";
+import "./EditProfilePage.css";
 import UserProfileForm from "../components/UserProfileForm";
 import LivingHabitsForm from "../components/LivingHabitsForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
-class ProfilePage extends Component {
+class EditProfilePage extends Component {
   constructor(props) {
     super(props);
     this.handleLivingHabitsClick = this.handleLivingHabitsClick.bind(this);
@@ -21,15 +21,15 @@ class ProfilePage extends Component {
 
   render() {
     return (
-      <div className="ProfilePage">
+      <div className="editProfilePage">
         <div style={{ position: "absolute", left: "90%", top: "10%" }}>
           <p>
             Hi <span style={{ fontWeight: "bold" }}>Karen</span>
           </p>
         </div>
         <h2 className="headerProp">User Profile</h2>
-        <div className="profileContainer">
-          <div className="profileInnner">
+        <div className="editProfileContainer">
+          <div className="editProfileInner">
             {renderComponent(this.state.viewFirstComponent)}
             <button
               type="button"
@@ -53,4 +53,4 @@ function renderComponent(canViewUserProfileComponentInput) {
   return <LivingHabitsForm />;
 }
 
-export default ProfilePage;
+export default EditProfilePage;
