@@ -63,6 +63,15 @@ function Welcome() {
   );
 }
 
+function Menu() {
+  <div style={{ position: "absolute", left: "90%", top: "5%" }}>
+    <p>
+      Hi <span style={{ fontWeight: "bold" }}>Karen</span>
+    </p>
+  </div>
+}
+
+
 class App extends React.Component {
   constructor(props) {
     super(props);
