@@ -22,6 +22,11 @@ class EditProfilePage extends Component {
   render() {
     return (
       <div className="editProfilePage">
+        <div style={{ position: "absolute", left: "90%", top: "10%" }}>
+          <p>
+            Hi, <span style={{ fontWeight: "bold" }}>Karen</span>
+          </p>
+        </div>
         <h2 className="headerProp">User Profile</h2>
         <div className="editProfileContainer">
           <div className="editProfileInner">
