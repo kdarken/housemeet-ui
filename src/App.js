@@ -6,6 +6,7 @@ import LoginPage from "./containers/LoginPage";
 import SignUpPage from "./containers/SignUpPage";
 import RestrictedRoute from "./components/RestrictedRoute"
 import EditProfilePage from "./containers/EditProfilePage";
+import ProfilePage from "./containers/ProfilePage";
 
 import { Helmet } from "react-helmet";
 import logo from "./images/housemeet-logo.svg";
@@ -63,6 +64,16 @@ function Welcome() {
   );
 }
 
+function Menu() {
+  return (
+    <div style={{ position: "absolute", left: "90%", top: "5%" }}>
+      <p>
+        Hi, <span style={{ fontWeight: "bold" }}>Karen</span>
+      </p>
+    </div>
+  )
+}
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -79,9 +90,11 @@ class App extends React.Component {
           <header className="Login-header">
             <DisplayLogo />
           </header>
+          <Menu />
           <Switch>
             <RestrictedRoute exact path="/home" component={Logout} requiresLogin={true} redirectPath="/" />
             <RestrictedRoute exact path="/profile/edit" component={EditProfilePage} requiresLogin={true} redirectPath="/" />
+            <RestrictedRoute exact path="/profile" component={ProfilePage} requiresLogin={true} redirectPath="/" />
             <RestrictedRoute exact path="/signup" component={SignUpPage} requiresLogin={false} redirectPath="/home" /> 
             <RestrictedRoute exact path="/login" component={LoginPage} requiresLogin={false} redirectPath="/home" />
             <RestrictedRoute exact path="/" component={Welcome} requiresLogin={false} redirectPath="/home" />
