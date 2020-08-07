@@ -6,6 +6,13 @@ import LoginPage from "./containers/LoginPage";
 import SignUpPage from "./containers/SignUpPage";
 import RestrictedRoute from "./components/RestrictedRoute"
 import EditProfilePage from "./containers/EditProfilePage";
+import menu from "./images/menu.svg";
+
+import $ from 'jquery';
+import Popper from 'popper.js';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+
+
 
 import { Helmet } from "react-helmet";
 import logo from "./images/housemeet-logo.svg";
@@ -64,11 +71,39 @@ function Welcome() {
 }
 
 function Menu() {
-  <div style={{ position: "absolute", left: "90%", top: "5%" }}>
-    <p>
-      Hi <span style={{ fontWeight: "bold" }}>Karen</span>
-    </p>
-  </div>
+  return (
+    <div style={{ position: "absolute", left: "86%", top: "5%", display: "flex" }}>
+      <div class="dropdown">
+        <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{marginTop: "16%", backgroundColor: "transparent", color: "black", border: "none", outline: "none"}}>
+          Hi, <span style={{ fontWeight: "bold", flexDirection: "row" }}>{localStorage.getItem('name')}</span>
+          <img
+            src={menu}
+            className="menu"
+            alt="menu"
+            class="rounded mx-auto d-block"
+            style={{
+              width: 25,
+              flexDirection: "row",
+              float: "right",
+              marginTop: "4%",
+              paddingLeft: "8%"
+            }}
+          />
+        </button>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="/home">Home</a>
+          <Link to="/">
+            <button class="dropdown-item" type="button" onClick={() => {localStorage.clear()}}>
+              Logout
+            </button>
+          </Link>
+          <a class="dropdown-item" href="/profile">Profile</a>
+          <a class="dropdown-item" href="/profile/edit">Edit Profile</a>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 
@@ -88,6 +123,7 @@ class App extends React.Component {
           <header className="Login-header">
             <DisplayLogo />
           </header>
+          <Menu />
           <Switch>
             <RestrictedRoute exact path="/home" component={Logout} requiresLogin={true} redirectPath="/" />
             <RestrictedRoute exact path="/profile/edit" component={EditProfilePage} requiresLogin={true} redirectPath="/" />
