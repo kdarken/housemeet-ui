@@ -1,12 +1,14 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, withRouter } from "react-router-dom";
 
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import LoginPage from "./containers/LoginPage";
 import SignUpPage from "./containers/SignUpPage";
-import RestrictedRoute from "./components/RestrictedRoute"
+import RestrictedRoute from "./components/RestrictedRoute";
 import EditProfilePage from "./containers/EditProfilePage";
+//import Menu from "./components/Menu";
 import menu from "./images/menu.svg";
+
 
 import $ from 'jquery';
 import Popper from 'popper.js';
@@ -35,9 +37,6 @@ function DisplayLogo() {
 }
 
 function Logout() {
-  //if (!localStorage.getItem('token')) {
-   //return null
-  //}
   return (
     <div style={{textAlign: "center"}}>
         <Link to="/">
@@ -72,40 +71,41 @@ function Welcome() {
 
 function Menu() {
   return (
-    <div style={{ position: "absolute", left: "86%", top: "5%", display: "flex" }}>
-      <div class="dropdown">
-        <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{marginTop: "16%", backgroundColor: "transparent", color: "black", border: "none", outline: "none"}}>
-          Hi, <span style={{ fontWeight: "bold", flexDirection: "row" }}>{localStorage.getItem('name')}</span>
-          <img
-            src={menu}
-            className="menu"
-            alt="menu"
-            class="rounded mx-auto d-block"
-            style={{
-              width: 25,
-              flexDirection: "row",
-              float: "right",
-              marginTop: "4%",
-              paddingLeft: "8%"
-            }}
-          />
-        </button>
+    <Router>
+        <div style={{ position: "absolute", left: "87%", top: "0%", display: "flex" }}>
+            <div class="btn-group dropleft">
+                <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{marginTop: "16%", backgroundColor: "transparent", color: "black", border: "none", outline: "none"}}>
+                Hi, <span style={{ fontWeight: "bold", flexDirection: "row" }}>{localStorage.getItem('name')}</span>
+                <img
+                    src={menu}
+                    className="menu"
+                    alt="menu"
+                    class="rounded mx-auto d-block"
+                    style={{
+                    width: 25,
+                    flexDirection: "row",
+                    float: "right",
+                    marginTop: "4%",
+                    paddingLeft: "8%"
+                    }}
+                />
+                </button>
 
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="/home">Home</a>
-          <Link to="/">
-            <button class="dropdown-item" type="button" onClick={() => {localStorage.clear()}}>
-              Logout
-            </button>
-          </Link>
-          <a class="dropdown-item" href="/profile">Profile</a>
-          <a class="dropdown-item" href="/profile/edit">Edit Profile</a>
+                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="/home">Home</a>
+                <Link to="/">
+                    <button class="dropdown-item" type="button" onClick={() => {localStorage.clear()}}>
+                    Logout
+                    </button>
+                </Link>
+                <a class="dropdown-item" href="/profile">Profile</a>
+                <a class="dropdown-item" href="/profile/edit">Edit Profile</a>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  )
+    </Router>
+  );
 }
-
 
 class App extends React.Component {
   constructor(props) {
@@ -117,13 +117,14 @@ class App extends React.Component {
     return (
       <Router>
         <div>
+        <Menu />
           <Helmet>
             <title>housemeet</title>
           </Helmet>
           <header className="Login-header">
             <DisplayLogo />
           </header>
-          <Menu />
+          
           <Switch>
             <RestrictedRoute exact path="/home" component={Logout} requiresLogin={true} redirectPath="/" />
             <RestrictedRoute exact path="/profile/edit" component={EditProfilePage} requiresLogin={true} redirectPath="/" />
