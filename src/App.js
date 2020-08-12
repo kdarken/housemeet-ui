@@ -6,6 +6,7 @@ import LoginPage from "./containers/LoginPage";
 import SignUpPage from "./containers/SignUpPage";
 import RestrictedRoute from "./components/RestrictedRoute"
 import EditProfilePage from "./containers/EditProfilePage";
+import Home from "./containers/Home";
 
 import { Helmet } from "react-helmet";
 import logo from "./images/housemeet-logo.svg";
@@ -80,7 +81,7 @@ class App extends React.Component {
             <DisplayLogo />
           </header>
           <Switch>
-            <RestrictedRoute exact path="/home" component={Logout} requiresLogin={true} redirectPath="/" />
+            <RestrictedRoute exact path="/home" component={Home} requiresLogin={true} redirectPath="/" />
             <RestrictedRoute exact path="/profile/edit" component={EditProfilePage} requiresLogin={true} redirectPath="/" />
             <RestrictedRoute exact path="/signup" component={SignUpPage} requiresLogin={false} redirectPath="/home" /> 
             <RestrictedRoute exact path="/login" component={LoginPage} requiresLogin={false} redirectPath="/home" />
