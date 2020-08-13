@@ -26,12 +26,18 @@ class UserProfileForm extends Component {
       currentCity: "",
       newCity: "",
       budget: "",
+      profilePhoto: null,
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChangeDate = this.handleChangeDate.bind(this);
   }
+
+  onFileChange = (event) => {
+    // Update the state
+    this.setState({ profilePhoto: event.target.files[0] });
+  };
 
   handleChange(event) {
     const value = event.target.value;
@@ -61,6 +67,7 @@ class UserProfileForm extends Component {
         newCity: this.state.newCity,
         budget: this.state.budget,
         email: "divineechidume@berkeley.edu",
+        profilePhoto: this.state.profilePhoto,
       })
       .then(
         (response) => {
@@ -205,7 +212,13 @@ class UserProfileForm extends Component {
                   Drag and Drop Photo <br />
                   or
                 </h5>
-                <input type="file" onChange={this.onFileChange} />
+                <input
+                  type="file"
+                  name="image"
+                  onChange={this.onFileChange}
+                  value={this.state.profilePhoto}
+                  required
+                />
               </div>
             </div>
           </div>
