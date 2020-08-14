@@ -52,7 +52,7 @@ class Profile extends Component {
             });      
           }, (error) => {
             console.log(error);
-            alert("Error");
+            //alert("Error"); stifling this b/c only seem to be getting error when function called when nobody logged in
           });
     }
 
