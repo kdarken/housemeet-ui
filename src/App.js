@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link, withRouter } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, useLocation } from "react-router-dom";
 
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import LoginPage from "./containers/LoginPage";
@@ -70,6 +70,10 @@ function Welcome() {
 }
 
 function Menu() {
+  const location = useLocation();
+  if (location.pathname == "/" || location.pathname == "/signup" || location.pathname == "/login") {
+    return null;
+  }
   return (
         <div style={{ position: "absolute", left: "87%", top: "0%", display: "flex" }}>
             <div class="btn-group dropleft">
