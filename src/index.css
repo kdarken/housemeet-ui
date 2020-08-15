@@ -13,6 +13,15 @@ body {
   font-family: "Fira Sans", sans-serif;
 }
 
+.btn:focus, .btn:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.dropdown-menu a:hover {
+  text-decoration: none;
+}
+
 h1,
 h2,
 h3,
