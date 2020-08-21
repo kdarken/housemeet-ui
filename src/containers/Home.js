@@ -10,8 +10,23 @@ class Home extends Component {
 
   render() {
     return (
-      <div className="home">
-          <MiniProfile />
+      <div class="home">
+        <div class="homeInner">
+          <div class="row justify-content-center">
+            <div class="column">
+              <div class="mr-3"><MiniProfile /></div>
+            </div>
+            <div class="column">
+              <div class="mr-3"><MiniProfile /></div>
+            </div>
+            <div class="column">
+              <div class="mr-3"><MiniProfile /></div>
+            </div>
+            <div class="column">
+              <MiniProfile />
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

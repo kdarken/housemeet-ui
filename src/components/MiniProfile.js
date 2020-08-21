@@ -91,21 +91,6 @@ class MiniProfile extends Component {
     }
 }
 
-function Social(props) {
-    return (
-        <div class="col-sm">
-            <a href={props.link}>
-                <img
-                    src={props.logo}
-                    class="icon"
-                    alt="logo"
-                />
-            </a>
-        </div>
-    );
-}
-
-
 ReactDOM.render(<MiniProfile />, document.getElementById("root"));
 
 export default MiniProfile;
