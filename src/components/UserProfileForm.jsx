@@ -8,6 +8,11 @@ import DatePicker from "react-datepicker";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faImage } from "@fortawesome/free-solid-svg-icons";
 
+import twitterLogo from "../images/twitter.svg";
+import facebookLogo from "../images/facebook.svg";
+import instagramLogo from "../images/instagram2.svg";
+import spotifyLogo from "../images/spotify.svg";
+
 import "react-datepicker/dist/react-datepicker.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "typeface-montserrat";
@@ -21,12 +26,11 @@ class UserProfileForm extends Component {
       lastName: "",
       dateOfBirth: "",
       lifeStyle: "",
-      roommateOrHousemate: "",
+      roommateOrHousemate: "Roommate",
       bio: "",
       currentCity: "",
       newCity: "",
       budget: "",
-      profilePhoto: null,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -34,12 +38,8 @@ class UserProfileForm extends Component {
     this.handleChangeDate = this.handleChangeDate.bind(this);
   }
 
-  onFileChange = (event) => {
-    // Update the state
-    this.setState({ profilePhoto: event.target.files[0] });
-  };
-
   handleChange(event) {
+    console.log(event.target.value);
     const value = event.target.value;
     this.setState({
       ...this.state,
@@ -51,6 +51,11 @@ class UserProfileForm extends Component {
     this.setState({
       dateOfBirth: date,
     });
+  };
+
+  handleChangeSelect = (event) => {
+    console.log(event.target.value);
+    this.setState({ roommateOrHousemate: event.target.value });
   };
 
   handleSubmit(event) {
@@ -67,7 +72,6 @@ class UserProfileForm extends Component {
         newCity: this.state.newCity,
         budget: this.state.budget,
         email: "divineechidume@berkeley.edu",
-        profilePhoto: this.state.profilePhoto,
       })
       .then(
         (response) => {
@@ -142,10 +146,14 @@ class UserProfileForm extends Component {
             <b>Looking for a Roommate of Housemate</b>
           </label>
           <div className="col-sm-5">
-            <select className="form-control" id="exampleFormControlSelect1">
-              <option>Roommate</option>
-              <option>Housemate</option>
-              <option>Either</option>
+            <select
+              class="form-control"
+              id="roommateOrHousemate"
+              onChange={this.handleChangeSelect}
+            >
+              <option value="Roommate">Roommate</option>
+              <option value="Housemate">Housemate</option>
+              <option value="Either">Either</option>
             </select>
           </div>
         </div>
@@ -202,23 +210,10 @@ class UserProfileForm extends Component {
             >
               <div class="card-header">Upload Profile Photo</div>
               <div class="card-body">
-                <h5 class="card-title">
-                  <FontAwesomeIcon
-                    icon={faImage}
-                    style={{ width: "20%", height: "auto" }}
-                  />
-                  <br />
-                  <br />
-                  Drag and Drop Photo <br />
-                  or
-                </h5>
-                <input
-                  type="file"
-                  name="image"
-                  onChange={this.onFileChange}
-                  value={this.state.profilePhoto}
-                  required
-                />
+                <h5>Link social media Profiles</h5>
+                <div className="row">
+                  <div link={this.state.twitterLink} logo={twitterLogo} />
+                </div>
               </div>
             </div>
           </div>
