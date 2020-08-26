@@ -48,7 +48,7 @@ class LivingHabitsForm extends Component {
     handleSubmit(event) {
         event.preventDefault();
         axios.post('/profiles/update/habits', { 
-            email: "may@gmail.com", //TODO: add email address from localStorage 
+            email: localStorage.getItem("email"),
             cleanScore: this.state.cleanScore,
             cleanScore2: this.state.cleanScore2,
             guestScore: this.state.guestScore,
