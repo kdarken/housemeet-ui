@@ -13,7 +13,7 @@ class MiniProfile extends Component {
         super(props);
         this.state = {
             profilePic: "https://avatars1.githubusercontent.com/u/21094532?s=460&u=cb7710ccbc3991cc0c4ce628c39b51811fa12480&v=4",
-            firstName: "Karen",
+            firstName: "",
             age: "21",
             personalTitle: "Professional",
             housingStatus: "Looking for a home",
@@ -29,13 +29,28 @@ class MiniProfile extends Component {
             cleanScore: "",
             guestScore: "",
             alcoholScore: "",
+            id: this.props.id
 
         };
-    
     }
 
     componentDidMount() {
-        
+        if (!this.state.id) {
+            return
+        }
+        let emailName = this.state.id.split('@')[0]; //TODO: this is not gonna work for emails other than gmail!!! temporary fix
+        console.log(emailName)
+        const url = '/profiles/email/' + emailName; //TODO: change to unique ID
+        axios.get(url)
+        .then((response) => {
+            console.log(response);
+            this.setState({ 
+                firstName: response.data.firstName
+            });      
+        }, (error) => {
+            console.log(error);
+            //alert("Error"); stifling this b/c only seem to be getting error when function called when nobody logged in
+        });
     }
 
     render() {

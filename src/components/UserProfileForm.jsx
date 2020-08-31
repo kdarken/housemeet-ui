@@ -53,6 +53,11 @@ class UserProfileForm extends Component {
     });
   };
 
+  handleChangeSelect = (event) => {
+    console.log(event.target.value);
+    this.setState({ roommateOrHousemate: event.target.value });
+  };
+
   handleSubmit(event) {
     event.preventDefault();
     axios
@@ -66,7 +71,7 @@ class UserProfileForm extends Component {
         currentCity: this.state.currentCity,
         newCity: this.state.newCity,
         budget: this.state.budget,
-        email: "divineechidume@berkeley.edu",
+        email: localStorage.getItem('email'),
         profilePhoto: this.state.profilePhoto,
       })
       .then(
@@ -142,10 +147,14 @@ class UserProfileForm extends Component {
             <b>Looking for a Roommate of Housemate</b>
           </label>
           <div className="col-sm-5">
-            <select className="form-control" id="exampleFormControlSelect1">
-              <option>Roommate</option>
-              <option>Housemate</option>
-              <option>Either</option>
+            <select
+              class="form-control"
+              id="roommateOrHousemate"
+              onChange={this.handleChangeSelect}
+            >
+              <option value="Roommate">Roommate</option>
+              <option value="Housemate">Housemate</option>
+              <option value="Either">Either</option>
             </select>
           </div>
         </div>
