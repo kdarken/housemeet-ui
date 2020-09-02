@@ -36,7 +36,7 @@ class UserProfileForm extends Component {
       houseMateGender: "",
       moveInDay: "",
       numberInHome: "",
-      preferredNeighborhood: "",
+      preferredNeighborhoods: "",
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -87,8 +87,8 @@ class UserProfileForm extends Component {
         houseMateGender: this.state.houseMateGender,
         moveInDay: this.state.moveInDay,
         numberInHome: this.state.numberInHome,
-        preferredNeighborhood: this.state.preferredNeighborhood,
-        email: "divineechidume@berkeley.edu",
+        preferredNeighborhoods: this.state.preferredNeighborhoods,
+        email: this.state.email,
       })
       .then(
         (response) => {
@@ -108,7 +108,7 @@ class UserProfileForm extends Component {
         <div className="form-group col-md-12">
           <div className="form-group row">
             <label for="bio" className="col-sm-5.5 col-form-label">
-              <b>Tell us About yourself</b>
+              <b>Tell us about yourself!</b>
             </label>
             <div class="col">
               <textarea
@@ -157,7 +157,7 @@ class UserProfileForm extends Component {
       <div className="form-group col-md-8">
         <div className="form-group row">
           <label for="roommateOrHousemate" className="col-sm-5.5">
-            <b>Looking for a Roommate of Housemate</b>
+            <b>Looking for...</b>
           </label>
           <div className="col-sm-5">
             <select
@@ -278,7 +278,7 @@ class UserProfileForm extends Component {
               <div className="form-row">
                 <div className="form-group row">
                   <label for="moveInDay" className="col-sm-5.5 col-form-label">
-                    <b>Move In Date</b>
+                    <b>Move-In Date</b>
                   </label>
                   <div className="col-sm-6">
                     <DatePicker
@@ -301,12 +301,11 @@ class UserProfileForm extends Component {
                 )}
 
                 {this.renderInput(
-                  "preferred Neighborhood",
-                  "preferredNeighborhood",
+                  "Preferred Neighborhoods",
+                  "preferredNeighborhoods",
                   "col-sm-5.5",
                   "col-sm",
-                  this.state.preferredNeighborhood,
-                  Number
+                  this.state.preferredNeighborhoods
                 )}
               </div>
 
@@ -326,7 +325,7 @@ class UserProfileForm extends Component {
                   this.state.newCity
                 )}
                 {this.renderInput(
-                  "budget",
+                  "Budget",
                   "budget",
                   "col-sm-5.5",
                   "col-sm-7",
