@@ -83,17 +83,12 @@ class UserProfileForm extends Component {
         currentCity: this.state.currentCity,
         newCity: this.state.newCity,
         budget: this.state.budget,
-<<<<<<< HEAD
-        email: localStorage.getItem('email'),
-        profilePhoto: this.state.profilePhoto,
-=======
         gender: this.state.gender,
         houseMateGender: this.state.houseMateGender,
         moveInDay: this.state.moveInDay,
         numberInHome: this.state.numberInHome,
         preferredNeighborhood: this.state.preferredNeighborhood,
         email: "divineechidume@berkeley.edu",
->>>>>>> origin/socials
       })
       .then(
         (response) => {
