@@ -31,11 +31,18 @@ class UserProfileForm extends Component {
       currentCity: "",
       newCity: "",
       budget: "",
+      email: "",
+      gender: "",
+      houseMateGender: "",
+      moveInDay: "",
+      numberInHome: "",
+      preferredNeighborhood: "",
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChangeDate = this.handleChangeDate.bind(this);
+    this.handleChangeDate_ = this.handleChangeDate_.bind(this);
   }
 
   handleChange(event) {
@@ -53,8 +60,13 @@ class UserProfileForm extends Component {
     });
   };
 
+  handleChangeDate_ = (date) => {
+    this.setState({
+      moveInDay: date,
+    });
+  };
+
   handleChangeSelect = (event) => {
-    console.log(event.target.value);
     this.setState({ roommateOrHousemate: event.target.value });
   };
 
@@ -71,6 +83,11 @@ class UserProfileForm extends Component {
         currentCity: this.state.currentCity,
         newCity: this.state.newCity,
         budget: this.state.budget,
+        gender: this.state.gender,
+        houseMateGender: this.state.houseMateGender,
+        moveInDay: this.state.moveInDay,
+        numberInHome: this.state.numberInHome,
+        preferredNeighborhood: this.state.preferredNeighborhood,
         email: "divineechidume@berkeley.edu",
       })
       .then(
@@ -139,10 +156,7 @@ class UserProfileForm extends Component {
     return (
       <div className="form-group col-md-8">
         <div className="form-group row">
-          <label
-            for="roommateOrHousemate"
-            className="col-sm-5.5 col-form-label"
-          >
+          <label for="roommateOrHousemate" className="col-sm-5.5">
             <b>Looking for a Roommate of Housemate</b>
           </label>
           <div className="col-sm-5">
@@ -165,35 +179,24 @@ class UserProfileForm extends Component {
     return <svg {...this.props}>{this.props.children}</svg>;
   };
 
-  renderInput(
-    name,
-    stateName,
-    groupClassInput,
-    colSize1,
-    colSize2,
-    value,
-    inputType = "text"
-  ) {
+  renderInput(name, stateName, colSize1, colSize2, value, inputType = "text") {
     var size1 = colSize1 + " col-form-label";
-    var groupClass = "form-group " + groupClassInput;
     return (
-      <div className={groupClass}>
-        <div className="form-group row">
-          <label for={stateName} className={size1}>
-            <b>{name}</b>
-          </label>
-          <div className={colSize2}>
-            <input
-              type={inputType}
-              name={stateName}
-              id={stateName}
-              className="form-control"
-              placeholder={name}
-              value={value}
-              onChange={this.handleChange}
-              required
-            />
-          </div>
+      <div className="form-group row">
+        <label for={stateName} className={size1}>
+          <b>{name}</b>
+        </label>
+        <div className={colSize2}>
+          <input
+            type={inputType}
+            name={stateName}
+            id={stateName}
+            className="form-control"
+            placeholder={name}
+            value={value}
+            onChange={this.handleChange}
+            required
+          />
         </div>
       </div>
     );
@@ -224,7 +227,6 @@ class UserProfileForm extends Component {
                 {this.renderInput(
                   "First Name",
                   "firstName",
-                  "col-md-4",
                   "col-sm-5.5",
                   "col-sm-7",
                   this.state.firstName
@@ -232,7 +234,6 @@ class UserProfileForm extends Component {
                 {this.renderInput(
                   "Last Name",
                   "lastName",
-                  "col-md-4",
                   "col-sm-5.5",
                   "col-sm-7",
                   this.state.lastName
@@ -241,9 +242,31 @@ class UserProfileForm extends Component {
               </div>
               <div className="form-row">
                 {this.renderInput(
+                  "Email",
+                  "email",
+                  "col-sm-5.5",
+                  "col-sm-7",
+                  this.state.email
+                )}
+                {this.renderInput(
+                  "Gender",
+                  "gender",
+                  "col-sm-5.5",
+                  "col-sm-7",
+                  this.state.gender
+                )}
+                {this.renderInput(
+                  "Preferred Roommate/Housemate's Gender",
+                  "houseMateGender",
+                  "col-sm-5.5",
+                  "col-sm",
+                  this.state.houseMateGender
+                )}
+              </div>
+              <div className="form-row">
+                {this.renderInput(
                   "Lifestyle",
                   "lifeStyle",
-                  "col-md-4",
                   "col-sm-5.5",
                   "col-8",
                   this.state.lifeStyle
@@ -253,10 +276,44 @@ class UserProfileForm extends Component {
 
               <this.renderBio />
               <div className="form-row">
+                <div className="form-group row">
+                  <label for="moveInDay" className="col-sm-5.5 col-form-label">
+                    <b>Move In Date</b>
+                  </label>
+                  <div className="col-sm-6">
+                    <DatePicker
+                      selected={this.state.moveInDay}
+                      onChange={this.handleChangeDate_}
+                      placeholderText="Click to select a date"
+                      showMonthDropdown
+                      showYearDropdown
+                      dropdownMode="select"
+                    />
+                  </div>
+                </div>
+
+                {this.renderInput(
+                  "Number of Roommates/Housemates",
+                  "numberInHome",
+                  "col-sm-5.5",
+                  "col-sm-4",
+                  this.state.numberInHome
+                )}
+
+                {this.renderInput(
+                  "preferred Neighborhood",
+                  "preferredNeighborhood",
+                  "col-sm-5.5",
+                  "col-sm",
+                  this.state.preferredNeighborhood,
+                  Number
+                )}
+              </div>
+
+              <div className="form-row">
                 {this.renderInput(
                   "Current City",
                   "currentCity",
-                  "col-md-4",
                   "col-sm-5.5",
                   "col-sm-7",
                   this.state.currentCity
@@ -264,7 +321,6 @@ class UserProfileForm extends Component {
                 {this.renderInput(
                   "New City",
                   "newCity",
-                  "col-md-4",
                   "col-sm-5.5",
                   "col-sm-7",
                   this.state.newCity
@@ -272,7 +328,6 @@ class UserProfileForm extends Component {
                 {this.renderInput(
                   "budget",
                   "budget",
-                  "col-md-4",
                   "col-sm-5.5",
                   "col-sm-7",
                   this.state.budget,
