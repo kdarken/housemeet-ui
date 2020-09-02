@@ -8,6 +8,11 @@ import DatePicker from "react-datepicker";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faImage } from "@fortawesome/free-solid-svg-icons";
 
+import twitterLogo from "../images/twitter.svg";
+import facebookLogo from "../images/facebook.svg";
+import instagramLogo from "../images/instagram2.svg";
+import spotifyLogo from "../images/spotify.svg";
+
 import "react-datepicker/dist/react-datepicker.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "typeface-montserrat";
@@ -21,25 +26,27 @@ class UserProfileForm extends Component {
       lastName: "",
       dateOfBirth: "",
       lifeStyle: "",
-      roommateOrHousemate: "",
+      roommateOrHousemate: "Roommate",
       bio: "",
       currentCity: "",
       newCity: "",
       budget: "",
-      profilePhoto: null,
+      email: "",
+      gender: "",
+      houseMateGender: "",
+      moveInDay: "",
+      numberInHome: "",
+      preferredNeighborhood: "",
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChangeDate = this.handleChangeDate.bind(this);
+    this.handleChangeDate_ = this.handleChangeDate_.bind(this);
   }
 
-  onFileChange = (event) => {
-    // Update the state
-    this.setState({ profilePhoto: event.target.files[0] });
-  };
-
   handleChange(event) {
+    console.log(event.target.value);
     const value = event.target.value;
     this.setState({
       ...this.state,
@@ -53,8 +60,13 @@ class UserProfileForm extends Component {
     });
   };
 
+  handleChangeDate_ = (date) => {
+    this.setState({
+      moveInDay: date,
+    });
+  };
+
   handleChangeSelect = (event) => {
-    console.log(event.target.value);
     this.setState({ roommateOrHousemate: event.target.value });
   };
 
@@ -71,8 +83,17 @@ class UserProfileForm extends Component {
         currentCity: this.state.currentCity,
         newCity: this.state.newCity,
         budget: this.state.budget,
+<<<<<<< HEAD
         email: localStorage.getItem('email'),
         profilePhoto: this.state.profilePhoto,
+=======
+        gender: this.state.gender,
+        houseMateGender: this.state.houseMateGender,
+        moveInDay: this.state.moveInDay,
+        numberInHome: this.state.numberInHome,
+        preferredNeighborhood: this.state.preferredNeighborhood,
+        email: "divineechidume@berkeley.edu",
+>>>>>>> origin/socials
       })
       .then(
         (response) => {
@@ -140,10 +161,7 @@ class UserProfileForm extends Component {
     return (
       <div className="form-group col-md-8">
         <div className="form-group row">
-          <label
-            for="roommateOrHousemate"
-            className="col-sm-5.5 col-form-label"
-          >
+          <label for="roommateOrHousemate" className="col-sm-5.5">
             <b>Looking for a Roommate of Housemate</b>
           </label>
           <div className="col-sm-5">
@@ -166,35 +184,24 @@ class UserProfileForm extends Component {
     return <svg {...this.props}>{this.props.children}</svg>;
   };
 
-  renderInput(
-    name,
-    stateName,
-    groupClassInput,
-    colSize1,
-    colSize2,
-    value,
-    inputType = "text"
-  ) {
+  renderInput(name, stateName, colSize1, colSize2, value, inputType = "text") {
     var size1 = colSize1 + " col-form-label";
-    var groupClass = "form-group " + groupClassInput;
     return (
-      <div className={groupClass}>
-        <div className="form-group row">
-          <label for={stateName} className={size1}>
-            <b>{name}</b>
-          </label>
-          <div className={colSize2}>
-            <input
-              type={inputType}
-              name={stateName}
-              id={stateName}
-              className="form-control"
-              placeholder={name}
-              value={value}
-              onChange={this.handleChange}
-              required
-            />
-          </div>
+      <div className="form-group row">
+        <label for={stateName} className={size1}>
+          <b>{name}</b>
+        </label>
+        <div className={colSize2}>
+          <input
+            type={inputType}
+            name={stateName}
+            id={stateName}
+            className="form-control"
+            placeholder={name}
+            value={value}
+            onChange={this.handleChange}
+            required
+          />
         </div>
       </div>
     );
@@ -211,23 +218,10 @@ class UserProfileForm extends Component {
             >
               <div class="card-header">Upload Profile Photo</div>
               <div class="card-body">
-                <h5 class="card-title">
-                  <FontAwesomeIcon
-                    icon={faImage}
-                    style={{ width: "20%", height: "auto" }}
-                  />
-                  <br />
-                  <br />
-                  Drag and Drop Photo <br />
-                  or
-                </h5>
-                <input
-                  type="file"
-                  name="image"
-                  onChange={this.onFileChange}
-                  value={this.state.profilePhoto}
-                  required
-                />
+                <h5>Link social media Profiles</h5>
+                <div className="row">
+                  <div link={this.state.twitterLink} logo={twitterLogo} />
+                </div>
               </div>
             </div>
           </div>
@@ -238,7 +232,6 @@ class UserProfileForm extends Component {
                 {this.renderInput(
                   "First Name",
                   "firstName",
-                  "col-md-4",
                   "col-sm-5.5",
                   "col-sm-7",
                   this.state.firstName
@@ -246,7 +239,6 @@ class UserProfileForm extends Component {
                 {this.renderInput(
                   "Last Name",
                   "lastName",
-                  "col-md-4",
                   "col-sm-5.5",
                   "col-sm-7",
                   this.state.lastName
@@ -255,9 +247,31 @@ class UserProfileForm extends Component {
               </div>
               <div className="form-row">
                 {this.renderInput(
+                  "Email",
+                  "email",
+                  "col-sm-5.5",
+                  "col-sm-7",
+                  this.state.email
+                )}
+                {this.renderInput(
+                  "Gender",
+                  "gender",
+                  "col-sm-5.5",
+                  "col-sm-7",
+                  this.state.gender
+                )}
+                {this.renderInput(
+                  "Preferred Roommate/Housemate's Gender",
+                  "houseMateGender",
+                  "col-sm-5.5",
+                  "col-sm",
+                  this.state.houseMateGender
+                )}
+              </div>
+              <div className="form-row">
+                {this.renderInput(
                   "Lifestyle",
                   "lifeStyle",
-                  "col-md-4",
                   "col-sm-5.5",
                   "col-8",
                   this.state.lifeStyle
@@ -267,10 +281,44 @@ class UserProfileForm extends Component {
 
               <this.renderBio />
               <div className="form-row">
+                <div className="form-group row">
+                  <label for="moveInDay" className="col-sm-5.5 col-form-label">
+                    <b>Move In Date</b>
+                  </label>
+                  <div className="col-sm-6">
+                    <DatePicker
+                      selected={this.state.moveInDay}
+                      onChange={this.handleChangeDate_}
+                      placeholderText="Click to select a date"
+                      showMonthDropdown
+                      showYearDropdown
+                      dropdownMode="select"
+                    />
+                  </div>
+                </div>
+
+                {this.renderInput(
+                  "Number of Roommates/Housemates",
+                  "numberInHome",
+                  "col-sm-5.5",
+                  "col-sm-4",
+                  this.state.numberInHome
+                )}
+
+                {this.renderInput(
+                  "preferred Neighborhood",
+                  "preferredNeighborhood",
+                  "col-sm-5.5",
+                  "col-sm",
+                  this.state.preferredNeighborhood,
+                  Number
+                )}
+              </div>
+
+              <div className="form-row">
                 {this.renderInput(
                   "Current City",
                   "currentCity",
-                  "col-md-4",
                   "col-sm-5.5",
                   "col-sm-7",
                   this.state.currentCity
@@ -278,7 +326,6 @@ class UserProfileForm extends Component {
                 {this.renderInput(
                   "New City",
                   "newCity",
-                  "col-md-4",
                   "col-sm-5.5",
                   "col-sm-7",
                   this.state.newCity
@@ -286,7 +333,6 @@ class UserProfileForm extends Component {
                 {this.renderInput(
                   "budget",
                   "budget",
-                  "col-md-4",
                   "col-sm-5.5",
                   "col-sm-7",
                   this.state.budget,

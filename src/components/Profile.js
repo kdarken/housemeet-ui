@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import axios from 'axios';
+import axios from "axios";
 import twitterLogo from "../images/twitter.svg";
 import facebookLogo from "../images/facebook.svg";
 import instagramLogo from "../images/instagram2.svg";
@@ -16,186 +16,236 @@ import "bootstrap/dist/css/bootstrap.css";
 import "typeface-montserrat";
 
 class Profile extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            profilePic: "https://avatars1.githubusercontent.com/u/21094532?s=460&u=cb7710ccbc3991cc0c4ce628c39b51811fa12480&v=4",
-            firstName: "Karen",
-            age: "21",
-            personalTitle: "Professional",
-            bio: "Hey, I'm Karen! I just graduated from UC Berkeley and I'm currently moving to Boston to work as a software engineer. I'd love to find somebody to find an apartment there with.",
-            facebookLink: "",
-            instagramLink: "",
-            twitterLink: "",
-            spotifyLink: "",
-            neighborhoods: ["Fenway", "Brighton"],
-            numHousemates: "1 housemate",
-            maxBudget: "$1000 per month",
-            movingDate: "June 2020",
-            cleanScore: "",
-            guestScore: "",
-            alcoholScore: "",
+  constructor(props) {
+    super(props);
+    this.state = {
+      profilePic:
+        "https://avatars1.githubusercontent.com/u/21094532?s=460&u=cb7710ccbc3991cc0c4ce628c39b51811fa12480&v=4",
+      firstName: "Karen",
+      age: "21",
+      personalTitle: "Professional",
+      bio:
+        "Hey, I'm Karen! I just graduated from UC Berkeley and I'm currently moving to Boston to work as a software engineer. I'd love to find somebody to find an apartment there with.",
+      facebookLink: "",
+      instagramLink: "",
+      twitterLink: "",
+      spotifyLink: "",
+      neighborhoods: ["Fenway", "Brighton"],
+      numHousemates: "1 housemate",
+      maxBudget: "$1000 per month",
+      movingDate: "June 2020",
+      cleanScore: "",
+      guestScore: "",
+      alcoholScore: "",
+    };
+  }
 
-        };
-    
-    }
+  componentDidMount() {
+    const url = "/profiles/" + localStorage.getItem("name"); //TODO: change to unique ID
+    axios.get(url).then(
+      (response) => {
+        console.log(response);
+        const habitsProfile = response.data[0];
+        const basicProfile = response.data[1];
 
-    componentDidMount() {
-        const url = '/profiles/' + localStorage.getItem('name'); //TODO: change to unique ID
-        axios.get(url)
-          .then((response) => {
-            console.log(response);
-            this.setState({ 
-                cleanScore: response.data.cleanScore,
-                guestScore: response.data.guestScore,
-                alcoholScore: response.data.alcoholScore
-            });      
-          }, (error) => {
-            console.log(error);
-            //alert("Error"); stifling this b/c only seem to be getting error when function called when nobody logged in
+        if (basicProfile) {
+          this.setState({
+            firstName: basicProfile.firstName,
+            bio: basicProfile.bio,
           });
-    }
+        }
 
-    render() {
-        return (
-            <div>
-                <div class="row" style={{margin: "0 auto"}}>
-                    <div class="col-md">
-                        <div class="row">
-                            <img class="rounded-circle" 
-                                src={this.state.profilePic}
-                                data-holder-rendered="true" 
-                                style={ {width: 200, border: "3px solid white", marginLeft:70} }
-                            />
-                        </div>
-                        <div class="row">
-                            <div class="socials" style={{display: "flex"}}>
-                                <Social link={this.state.facebookLink} logo={facebookLogo} />
-                                <Social link={this.state.instagramLink} logo={instagramLogo} />
-                                <Social link={this.state.twitterLink} logo={twitterLogo} />
-                                <Social link={this.state.spotifyLink} logo={spotifyLogo} />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="row" style={{marginTop: 30}}>
-                            <div class="userName">{this.state.firstName}, {this.state.age} <br/></div>
-                        </div>
-                        <div class="row">
-                            <div class="personalTitle">{this.state.personalTitle}</div>
-                        </div>
-                        <div class="row">
-                            <div class="bioContainer">
-                                <p id="bio">{this.state.bio}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        if (habitsProfile) {
+          this.setState({
+            cleanScore: habitsProfile.cleanScore,
+            guestScore: habitsProfile.guestScore,
+            alcoholScore: habitsProfile.alcoholScore,
+          });
+        }
+      },
+      (error) => {
+        console.log(error);
+        //alert("Error"); stifling this b/c only seem to be getting error when function called when nobody logged in
+      }
+    );
+  }
 
-                <div class="row" style={{margin: "0 auto", marginTop: 60, backgroundColor: "white", padding: 10, maxWidth: "89%"}}>
-                    <div class="sectionTitle">{this.state.firstName}'s Housing Preferences</div>
-                </div>
-
-                <div class="row" style={{margin: "0 auto", backgroundColor: "white", padding: 10, maxWidth: "89%"}}>
-                    <div class="housingPreferences" style={{display: "flex", margin: "0 auto"}}>
-                        <IconInfo 
-                            icon={house} 
-                            caption="Prefers living in" 
-                            options={this.state.neighborhoods} 
-                            type="neighborhoodPref" 
-                        />
-                        <IconInfo 
-                            icon={face} 
-                            caption="Looking for" 
-                            options={this.state.numHousemates} 
-                            type="pref" 
-                        />
-                        <IconInfo 
-                            icon={dollar} 
-                            caption="Can spend up to" 
-                            options={this.state.maxBudget} 
-                            type="pref" 
-                        />
-                        <IconInfo 
-                            icon={clock} 
-                            caption="Moving in" 
-                            options={this.state.movingDate} 
-                            type="pref" 
-                        />
-                    </div>               
-                </div>
-
-                <div class="row" style={{margin: "0 auto", marginTop: 60, backgroundColor: "white", padding: 10, maxWidth: "89%"}}>
-                    <div class="sectionTitle">{this.state.firstName}'s Lifestyle</div>
-                </div>
-                <div class="row" style={{margin: "0 auto", backgroundColor: "white", padding: 10, maxWidth: "89%"}}>
-                    <div class="housingPreferences" style={{display: "flex"}}>
-                        <IconInfo 
-                            icon={broom} 
-                            caption="clean" 
-                            options={this.state.cleanScore} 
-                            type="habit" 
-                        />
-                        <IconInfo 
-                            icon={guests} 
-                            caption="has guests over" 
-                            options={this.state.guestScore} 
-                            type="habit" 
-                        />   
-                        <IconInfo 
-                            icon={beer} 
-                            caption="drinks" 
-                            options={this.state.alcoholScore} 
-                            type="habit" 
-                        />        
-                    </div>               
-                </div>
+  render() {
+    return (
+      <div>
+        <div class="row" style={{ margin: "0 auto" }}>
+          <div class="col-md">
+            <div class="row">
+              <img
+                class="rounded-circle"
+                src={this.state.profilePic}
+                data-holder-rendered="true"
+                style={{
+                  width: 200,
+                  border: "3px solid white",
+                  marginLeft: 70,
+                }}
+              />
             </div>
-        );
-    }
+            <div class="row">
+              <div class="socials" style={{ display: "flex" }}>
+                <Social link={this.state.facebookLink} logo={facebookLogo} />
+                <Social link={this.state.instagramLink} logo={instagramLogo} />
+                <Social link={this.state.twitterLink} logo={twitterLogo} />
+                <Social link={this.state.spotifyLink} logo={spotifyLogo} />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="row" style={{ marginTop: 30 }}>
+              <div class="userName">
+                {this.state.firstName}, {this.state.age} <br />
+              </div>
+            </div>
+            <div class="row">
+              <div class="personalTitle">{this.state.personalTitle}</div>
+            </div>
+            <div class="row">
+              <div class="bioContainer">
+                <p id="bio">{this.state.bio}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="row"
+          style={{
+            margin: "0 auto",
+            marginTop: 60,
+            backgroundColor: "white",
+            padding: 10,
+            maxWidth: "89%",
+          }}
+        >
+          <div class="sectionTitle">
+            {this.state.firstName}'s Housing Preferences
+          </div>
+        </div>
+
+        <div
+          class="row"
+          style={{
+            margin: "0 auto",
+            backgroundColor: "white",
+            padding: 10,
+            maxWidth: "89%",
+          }}
+        >
+          <div
+            class="housingPreferences"
+            style={{ display: "flex", margin: "0 auto" }}
+          >
+            <IconInfo
+              icon={house}
+              caption="Prefers living in"
+              options={this.state.neighborhoods}
+              type="neighborhoodPref"
+            />
+            <IconInfo
+              icon={face}
+              caption="Looking for"
+              options={this.state.numHousemates}
+              type="pref"
+            />
+            <IconInfo
+              icon={dollar}
+              caption="Can spend up to"
+              options={this.state.maxBudget}
+              type="pref"
+            />
+            <IconInfo
+              icon={clock}
+              caption="Moving in"
+              options={this.state.movingDate}
+              type="pref"
+            />
+          </div>
+        </div>
+
+        <div
+          class="row"
+          style={{
+            margin: "0 auto",
+            marginTop: 60,
+            backgroundColor: "white",
+            padding: 10,
+            maxWidth: "89%",
+          }}
+        >
+          <div class="sectionTitle">{this.state.firstName}'s Lifestyle</div>
+        </div>
+        <div
+          class="row"
+          style={{
+            margin: "0 auto",
+            backgroundColor: "white",
+            padding: 10,
+            maxWidth: "89%",
+          }}
+        >
+          <div class="housingPreferences" style={{ display: "flex" }}>
+            <IconInfo
+              icon={broom}
+              caption="clean"
+              options={this.state.cleanScore}
+              type="habit"
+            />
+            <IconInfo
+              icon={guests}
+              caption="has guests over"
+              options={this.state.guestScore}
+              type="habit"
+            />
+            <IconInfo
+              icon={beer}
+              caption="drinks"
+              options={this.state.alcoholScore}
+              type="habit"
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 function Social(props) {
-    return (
-        <div class="col-sm">
-            <a href={props.link}>
-                <img
-                    src={props.logo}
-                    class="icon"
-                    alt="logo"
-                />
-            </a>
-        </div>
-    );
+  return (
+    <div class="col-sm">
+      <a href={props.link}>
+        <img src={props.logo} class="icon" alt="logo" />
+      </a>
+    </div>
+  );
 }
 
- 
 function IconInfo(props) {
-    if (props.type === "neighborhoodPref") {
-        var fullCaption = props.caption + '\xa0' + props.options.join(', ');
-    } else if (props.type === "pref") {
-        var fullCaption = props.caption + '\xa0' + props.options;
-    } else {
-        var freq = "Sometimes"
-        if (parseInt(props.options) === 100) {
-            freq = "Frequently"
-        } 
-        if (parseInt(props.options) === 0) {
-            freq = "Never"
-        }
-        var fullCaption = freq + '\xa0' + props.caption;
+  if (props.type === "neighborhoodPref") {
+    var fullCaption = props.caption + "\xa0" + props.options.join(", ");
+  } else if (props.type === "pref") {
+    var fullCaption = props.caption + "\xa0" + props.options;
+  } else {
+    var freq = "Sometimes";
+    if (parseInt(props.options) === 100) {
+      freq = "Frequently";
     }
-    return (
-        <div class="col">
-            <img
-                src={props.icon}
-                class="rounded mx-auto d-block icon"
-                alt="icon"                
-            />
-            <p class="iconCaption">{fullCaption}</p>
-        </div>
-    )
-    
+    if (parseInt(props.options) === 0) {
+      freq = "Never";
+    }
+    var fullCaption = freq + "\xa0" + props.caption;
+  }
+  return (
+    <div class="col">
+      <img src={props.icon} class="rounded mx-auto d-block icon" alt="icon" />
+      <p class="iconCaption">{fullCaption}</p>
+    </div>
+  );
 }
 
 ReactDOM.render(<Profile />, document.getElementById("root"));
