@@ -74,6 +74,7 @@ class UserProfileForm extends Component {
     event.preventDefault();
     axios
       .post("/profiles/update/basic", {
+        userId: localStorage.getItem("userId"),
         firstName: this.state.firstName,
         lastName: this.state.lastName,
         dateOfBirth: this.state.dateOfBirth,

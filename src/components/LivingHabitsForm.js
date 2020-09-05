@@ -48,6 +48,7 @@ class LivingHabitsForm extends Component {
     handleSubmit(event) {
         event.preventDefault();
         axios.post('/profiles/update/habits', { 
+            userId: localStorage.getItem("userId"),
             email: localStorage.getItem("email"),
             cleanScore: this.state.cleanScore,
             cleanScore2: this.state.cleanScore2,

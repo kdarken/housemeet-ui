@@ -38,14 +38,14 @@ class MiniProfile extends Component {
         if (!this.state.id) {
             return
         }
-        let emailName = this.state.id.split('@')[0]; //TODO: this is not gonna work for emails other than gmail!!! temporary fix
-        console.log(emailName)
-        const url = '/profiles/email/' + emailName; //TODO: change to unique ID
+        const url = '/profiles/' + this.state.id; 
         axios.get(url)
         .then((response) => {
             console.log(response);
+            const habitsProfile = response.data[0]; //beware of one or both of these profiles being null if user's forms not submitted
+            const basicProfile = response.data[1];
             this.setState({ 
-                firstName: response.data.firstName
+                firstName: basicProfile.firstName
             });      
         }, (error) => {
             console.log(error);

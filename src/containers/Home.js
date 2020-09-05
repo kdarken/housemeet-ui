@@ -14,7 +14,7 @@ class Home extends Component {
 }
 
   componentDidMount() {
-    const url = '/profiles/matches/' + localStorage.getItem('name'); //TODO: change to unique ID
+    const url = '/profiles/matches/' + localStorage.getItem("userId");
     axios.get(url)
       .then((response) => {
         console.log(response);

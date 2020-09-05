@@ -36,6 +36,7 @@ class SignUpForm extends React.Component {
     }
     axios.post('/users/signup', {
       name: this.state.name,
+      userId: "",
       email: this.state.email,
       password: this.state.password
     })
@@ -43,6 +44,7 @@ class SignUpForm extends React.Component {
       console.log(response);
       alert("Your account has been created! Logging you in...");
       console.log(response.data.user.email)
+      localStorage.setItem('userId', response.data.user.userId)
       localStorage.setItem('email', response.data.user.email)
       localStorage.setItem('name', response.data.user.name)
       localStorage.setItem('token', response.data.token)

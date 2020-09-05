@@ -38,18 +38,6 @@ function DisplayLogo() {
   );
 }
 
-function Logout() {
-  return (
-    <div style={{textAlign: "center"}}>
-        <Link to="/">
-          <button type="button" class="btn btn-primary" onClick={() => {localStorage.clear()}}>
-            Logout
-          </button>
-        </Link>
-    </div>
-  );
-}
-
 function Welcome() {
   return (
     <div>
