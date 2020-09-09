@@ -29,9 +29,42 @@ class MiniProfile extends Component {
             cleanScore: "",
             guestScore: "",
             alcoholScore: "",
-            id: this.props.id
-
+            id: this.props.id,
+            liked: false,
+            disliked: false
         };
+        this.handleLike = this.handleLike.bind(this);
+        this.handleDislike = this.handleDislike.bind(this);
+    }
+
+    handleLike() {
+        const url = "/users/" + localStorage.getItem("userId") + "/likes"
+        axios.post(url, { 
+            likedUserId: this.state.id
+        })
+        .then((response) => {
+            console.log(response);
+            alert("You liked " + this.state.firstName + "!");
+            this.setState({liked: true})
+        }, (error) => {
+            console.log(error);
+            alert("Unable to like this profile.");
+        });
+    }
+
+    handleDislike() {
+        const url = "/users/" + localStorage.getItem("userId") + "/dislikes"
+        axios.post(url, { 
+            dislikedUserId: this.state.id
+        })
+        .then((response) => {
+            console.log(response);
+            alert("You disliked " + this.state.firstName + "!");
+            this.setState({disliked: true})
+        }, (error) => {
+            console.log(error);
+            alert("Unable to dislike this profile.");
+        });
     }
 
     componentDidMount() {
@@ -55,19 +88,22 @@ class MiniProfile extends Component {
 
     render() {
         return (
-            <div class="card" style={{width: "18rem"}}>
+            <div>
+            { this.state.liked || this.state.disliked
+                ? null 
+                : <div class="card" style={{width: "18rem"}}>
                 <div class="closeContainer">
                     <img class="topButton" 
                         src={close}
                         data-holder-rendered="true" 
-                        
+                        onClick={this.handleDislike}
                     />
                 </div>
                 <div class="heartContainer">
                     <img class="topButton" 
                         src={heart}
                         data-holder-rendered="true" 
-                        
+                        onClick={this.handleLike}
                     />
                 </div>
                 <div class="card-body">
@@ -100,6 +136,7 @@ class MiniProfile extends Component {
                     </div>
                  
                 </div>
+            </div> }
             </div>
             
         );
