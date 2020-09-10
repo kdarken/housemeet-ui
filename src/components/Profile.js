@@ -15,10 +15,12 @@ import guests from "../images/guests.svg";
 import "bootstrap/dist/css/bootstrap.css";
 import "typeface-montserrat";
 
+
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      userId: props.userId,
       profilePic:
         "https://avatars1.githubusercontent.com/u/21094532?s=460&u=cb7710ccbc3991cc0c4ce628c39b51811fa12480&v=4",
       firstName: "Karen",
@@ -41,10 +43,10 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    if (!localStorage.getItem("userId")) {
+    if (!this.state.userId) {
       return
     }
-    const url = "/profiles/" + localStorage.getItem("userId"); 
+    const url = "/profiles/" + this.state.userId; 
     axios.get(url).then(
       (response) => {
         console.log(response);

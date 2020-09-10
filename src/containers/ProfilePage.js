@@ -21,7 +21,7 @@ class ProfilePage extends Component {
         return (
             <div className="profileContainer">
                 <div className="profileInner">
-                    <Profile />
+                    <Profile userId={localStorage.getItem('userId')} />
                 </div>
             </div>
         );

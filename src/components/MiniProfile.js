@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Switch, Route, Link, useLocation } from "react-router-dom";import ReactDOM from "react-dom";
 import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.css";
 import "typeface-montserrat";
@@ -29,12 +29,13 @@ class MiniProfile extends Component {
             cleanScore: "",
             guestScore: "",
             alcoholScore: "",
-            id: this.props.id,
+            id: props.id,
             liked: false,
             disliked: false
         };
         this.handleLike = this.handleLike.bind(this);
         this.handleDislike = this.handleDislike.bind(this);
+        this.callHandleMiniProfileClick = this.callHandleMiniProfileClick.bind(this);
     }
 
     handleLike() {
@@ -67,6 +68,11 @@ class MiniProfile extends Component {
         });
     }
 
+    callHandleMiniProfileClick() {
+        var clickedProfileId = this.state.id
+        this.props.handleMiniProfileClick(clickedProfileId)
+    }
+
     componentDidMount() {
         if (!this.state.id) {
             return
@@ -88,6 +94,7 @@ class MiniProfile extends Component {
 
     render() {
         return (
+            <Router>
             <div>
             { this.state.liked || this.state.disliked
                 ? null 
@@ -106,6 +113,7 @@ class MiniProfile extends Component {
                         onClick={this.handleLike}
                     />
                 </div>
+                <div id="miniProfileBody" onClick={this.callHandleMiniProfileClick}> 
                 <div class="card-body">
                     <div class="profilePicContainer">
                         <img class="rounded-circle profilePic" 
@@ -134,10 +142,11 @@ class MiniProfile extends Component {
                         />
                         <p class="card-text">&nbsp; Moving in {this.state.movingDate}</p>
                     </div>
-                 
+                </div>
                 </div>
             </div> }
             </div>
+            </Router>
             
         );
     }
